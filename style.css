@@ -93,10 +93,15 @@ nav{
     justify-content: space-between;
     flex-wrap: nowrap;
     padding: 20px 0;
-    position: relative;
+    position: sticky;
+    top: 0;
+    background: rgba(0, 0, 0, 0.95);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
     z-index: 100;
     gap: 15px;
     width: 100%;
+    border-bottom: 1px solid rgba(0, 255, 65, 0.2);
 }
 
 nav > * {
@@ -106,6 +111,13 @@ nav > * {
 nav .fas.fa-bars {
     order: 4;
     flex-shrink: 0;
+    position: sticky;
+    top: 0;
+    z-index: 101;
+    background: rgba(0, 0, 0, 0.9);
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid rgba(0, 255, 65, 0.3);
 }
 
 .logo{
@@ -1088,13 +1100,20 @@ form .btn2{
 }
 
 /* -----------------css for small screens--------- */
-nav .fas{
-    display: none;
-    color: #00ff41;
-    font-size: 25px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
+    nav .fas{
+        display: block !important;
+        color: #00ff41;
+        font-size: 24px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        position: sticky;
+        top: 0;
+        z-index: 101;
+        background: rgba(0, 0, 0, 0.9);
+        padding: 8px;
+        border-radius: 5px;
+        border: 1px solid rgba(0, 255, 65, 0.3);
+    }
 
 nav .fas:hover {
     color: #00ffff;
@@ -1103,53 +1122,71 @@ nav .fas:hover {
 
 @media only screen and (max-width: 600px){
     .container {
-        padding: 10px 5%;
+        padding: 10px 4%;
+        max-width: 100%;
+        overflow-x: hidden;
     }
     
     #header{
         background: linear-gradient(135deg, #000000 0%, #001a00 50%, #000000 100%);
         height: 100vh;
+        min-height: 600px;
+        overflow-x: hidden;
     }
+    
     .header-text{
-        margin-top: 80px;
-        font-size: 14px;
-        padding: 20px;
-    }
-    .header-text h1{
-        font-size: 28px;
-        line-height: 1.2;
-    }
-    .header-text p {
-        font-size: 14px;
-    }
-    .tech-stats {
-        gap: 20px;
-        justify-content: center;
-    }
-    .stat-item {
-        min-width: 100px;
+        margin-top: 100px;
+        font-size: 13px;
         padding: 15px;
+        width: 100%;
+        box-sizing: border-box;
     }
+    
+    .header-text h1{
+        font-size: 24px;
+        line-height: 1.3;
+        word-wrap: break-word;
+    }
+    
+    .header-text p {
+        font-size: 13px;
+        margin: 10px 0;
+    }
+    
+    .tech-stats {
+        flex-wrap: wrap;
+        gap: 15px;
+        justify-content: center;
+        margin-top: 20px;
+    }
+    
+    .stat-item {
+        min-width: 90px;
+        padding: 12px;
+        flex: 0 0 auto;
+    }
+    
     .stat-number {
-        font-size: 28px;
+        font-size: 24px;
     }
-    nav .fas{
-        display: block;
-        font-size: 25px;
+    
+    .stat-label {
+        font-size: 11px;
     }
     nav ul{
-        background: rgba(0, 0, 0, 0.95);
+        background: rgba(0, 0, 0, 0.98);
         border: 1px solid rgba(0, 255, 65, 0.3);
         position: fixed;
         top: 0;
         right: -200px;
         width: 200px;
         height: 100vh;
-        padding-top: 50px;
-        z-index: 2;
+        padding-top: 60px;
+        z-index: 1000;
         transition: right 0.5s;
         -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px);
+        backdrop-filter: blur(10px);
+        overflow-y: auto;
     }
     nav ul li{
         display: block;
@@ -1171,27 +1208,173 @@ nav .fas:hover {
     }
     .about-col-1, .about-col-2{
         flex-basis: 100%;
+        width: 100%;
     }
     .about-col-1{
         margin-bottom: 30px;
+        padding: 0;
+    }
+    .about-col-1 img {
+        width: 100%;
+        max-width: 100%;
     }
     .about-col-2{
         font-size: 14px;
+        padding: 0;
     }
     .tab-links{
-        font-size: 14px;
-        margin-right: 15px;
-        padding: 8px 12px;
+        font-size: 13px;
+        margin-right: 10px;
+        padding: 6px 10px;
     }
     .contact-left, .contact-right{
         flex-basis: 100%;
+        width: 100%;
     }
     .contact-left {
         margin-bottom: 30px;
     }
     .copyright{
+        font-size: 11px;
+        padding: 15px 10px;
+        line-height: 1.5;
+    }
+    
+    /* Services Mobile */
+    .services-list {
+        grid-template-columns: 1fr;
+        gap: 25px;
+        padding: 0;
+    }
+    
+    .services-list div {
+        padding: 20px;
+    }
+    
+    /* Portfolio Mobile */
+    .work-list {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .work {
+        width: 100%;
+    }
+    
+    .work img {
+        width: 100%;
+        height: auto;
+    }
+    
+    /* Skills Mobile */
+    .skills-list {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    /* Code Editor Mobile */
+    .code-editor-container {
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .code-editor, .code-output {
+        width: 100%;
+    }
+    
+    .code-content {
+        padding: 15px;
         font-size: 12px;
-        padding: 10px;
+    }
+    
+    .code-output-content {
+        padding: 15px;
+        font-size: 12px;
+    }
+    
+    /* Pricing Mobile */
+    .pricing-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 0;
+    }
+    
+    .pricing-card {
+        margin: 0;
+        padding: 20px;
+    }
+    
+    .pricing-features {
+        font-size: 14px;
+    }
+    
+    .pricing-features li {
+        padding: 8px 0;
+        font-size: 13px;
+    }
+    
+    /* Contact Form Mobile */
+    .contact-right form {
+        padding: 15px;
+    }
+    
+    .contact-right input,
+    .contact-right textarea,
+    .contact-right select {
+        font-size: 14px;
+        padding: 12px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+    
+    form input, form textarea {
+        font-size: 16px;
+        padding: 12px;
+    }
+    
+    /* Terminal Mobile */
+    #terminal {
+        width: 100%;
+        height: 50vh;
+        max-height: 350px;
+        left: 0;
+        right: 0;
+    }
+    
+    .terminal-body {
+        font-size: 11px;
+        padding: 12px;
+    }
+    
+    .terminal-input {
+        font-size: 12px;
+        padding: 8px;
+    }
+    
+    /* Analytics Mobile */
+    #analytics-dashboard {
+        width: calc(100% - 20px);
+        left: 10px;
+        right: 10px;
+        max-height: 75vh;
+        padding: 15px;
+    }
+    
+    .analytics-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+    
+    .analytics-card {
+        padding: 15px;
+    }
+    
+    .analytics-value {
+        font-size: 24px;
+    }
+    
+    .analytics-label {
+        font-size: 11px;
     }
     
     /* Services Section Mobile */
@@ -1293,7 +1476,40 @@ nav .fas:hover {
     /* Live Chat Mobile */
     #live-chat {
         width: calc(100% - 20px);
-        max-width: none;
+        max-width: 280px;
+        bottom: 80px;
+        right: 10px;
+        max-height: 50vh;
+    }
+    
+    .chat-body {
+        height: 250px;
+        max-height: 40vh;
+    }
+    
+    .chat-header {
+        padding: 10px 15px;
+        font-size: 14px;
+    }
+    
+    .chat-messages {
+        padding: 15px;
+        font-size: 13px;
+    }
+    
+    .message-avatar {
+        width: 28px;
+        height: 28px;
+        font-size: 12px;
+    }
+    
+    .chat-input-container {
+        padding: 10px;
+    }
+    
+    .chat-input {
+        font-size: 14px;
+        padding: 8px;
     }
     
     /* WhatsApp Button Mobile */
@@ -3225,7 +3441,8 @@ select:focus {
     position: fixed;
     bottom: 100px;
     right: 30px;
-    width: 350px;
+    width: 300px;
+    max-height: 400px;
     background: rgba(0, 0, 0, 0.95);
     border: 2px solid var(--primary-color);
     border-radius: 15px;
@@ -3270,7 +3487,8 @@ select:focus {
 }
 
 .chat-body {
-    height: 400px;
+    height: 300px;
+    max-height: 60vh;
     display: flex;
     flex-direction: column;
 }
@@ -3645,62 +3863,128 @@ select:focus {
     
     .challenge-container {
         grid-template-columns: 1fr;
+        gap: 20px;
     }
     
     .challenge-sidebar {
         order: 2;
+        padding: 20px;
     }
     
     .challenge-example pre {
+        font-size: 11px;
+        padding: 8px;
+        overflow-x: auto;
+    }
+    
+    .challenge-editor {
+        order: 1;
+    }
+    
+    .code-editor-textarea {
+        min-height: 250px;
         font-size: 12px;
-        padding: 10px;
+        padding: 15px;
+    }
+    
+    .editor-output {
+        min-height: 100px;
+        max-height: 200px;
+        padding: 15px;
+        font-size: 12px;
     }
     
     .game-container {
-        padding: 20px;
+        padding: 15px;
     }
     
     .game-stats {
         grid-template-columns: 1fr;
-        gap: 15px;
+        gap: 10px;
+        padding: 15px;
+    }
+    
+    .game-stat {
+        font-size: 14px;
+        padding: 10px;
     }
     
     .game-text-container {
-        padding: 20px;
-        font-size: 14px;
-        min-height: 120px;
+        padding: 15px;
+        font-size: 12px;
+        min-height: 100px;
+        max-height: 200px;
+        overflow-y: auto;
     }
     
     .game-input {
-        font-size: 14px;
-        min-height: 100px;
+        font-size: 13px;
+        min-height: 80px;
+        padding: 12px;
     }
     
     .game-controls {
         flex-direction: column;
+        gap: 10px;
     }
     
     .game-btn {
         width: 100%;
+        padding: 12px;
+        font-size: 14px;
     }
     
     .result-stats {
         grid-template-columns: 1fr;
-        gap: 15px;
+        gap: 10px;
     }
     
     .stat-value {
-        font-size: 24px;
+        font-size: 20px;
     }
     
     .result-value {
-        font-size: 28px;
+        font-size: 24px;
+    }
+    
+    /* Christmas Game Mobile */
+    #christmas-game {
+        padding: 40px 0;
+    }
+    
+    .christmas-game-container {
+        padding: 20px;
+    }
+    
+    .memory-game-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+    }
+    
+    .memory-card {
+        height: 70px;
+    }
+    
+    .card-front,
+    .card-back {
+        font-size: 24px;
+    }
+    
+    .game-info-bar {
+        padding: 15px;
+        gap: 10px;
+    }
+    
+    .game-stat {
+        font-size: 14px;
     }
     
     #live-chat {
-        width: calc(100% - 40px);
-        right: 20px;
+        width: calc(100% - 20px);
+        max-width: 280px;
+        right: 10px;
         bottom: 80px;
+        max-height: 50vh;
     }
     
     .social-proof {
@@ -3996,8 +4280,9 @@ select:focus {
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 1;
+    z-index: 0;
     pointer-events: none;
+    opacity: 0.3;
 }
 
 
@@ -4296,6 +4581,7 @@ select:focus {
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 1;
+    z-index: 0;
     pointer-events: none;
+    opacity: 0.3;
 }

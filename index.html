@@ -1726,15 +1726,9 @@ Passion: Web Development, UI/UX Design, Tech Innovation`,
                 window.toggleTerminal();
             }
         }
-        // T key to toggle theme
-        if (e.key === 't' || e.key === 'T') {
-            const activeElement = document.activeElement;
-            if (!activeElement || (activeElement.tagName !== 'INPUT' && activeElement.tagName !== 'TEXTAREA')) {
-                if (typeof window.toggleTheme === 'function') {
-                    window.toggleTheme();
-                }
-            }
-        }
+        // T key to toggle theme (disabled on mobile to prevent accidental changes)
+        // Theme can only be changed via button click
+        // Removed keyboard shortcut to prevent accidental theme changes
         // Escape to close terminal
         if (e.key === 'Escape' && terminalOpen) {
             if (typeof window.toggleTerminal === 'function') {
