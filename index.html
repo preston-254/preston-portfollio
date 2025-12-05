@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preston Mwendwa - Tech Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/c4254e24a8.js" crossorigin="anonymous"></script>
+    
+</head>
+<body>
+<!-- Matrix Background Canvas -->
+<canvas id="matrix-canvas"></canvas>
+<canvas id="particles-canvas"></canvas>
+
+<div id="header">
+    <div class="container">
+        <nav>
+            <img src="images/logo.png" class="logo" alt="Preston Mwendwa Logo">
+            <ul id="sidemenu">
+                <li><a href="#header">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><i class="fas fa-times" onclick="closemenu()" aria-label="Close menu"></i></li>
+            </ul>
+            <i class="fas fa-bars" onclick="openmenu()"></i>
+        </nav>
+        <div class="header-text">
+            <p class="typing-text"><span class="terminal-prompt">$</span> <span id="typing"></span><span class="cursor-blink">|</span></p>
+            <h1 class="glitch" data-text="Hi, I am Preston">Hi, I am <span class="neon-text">Preston</span><br>From Kenya</h1>
+            <div class="tech-stats">
+                <div class="stat-item">
+                    <div class="stat-number" data-target="50">0</div>
+                    <div class="stat-label">Projects</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-target="100">0</div>
+                    <div class="stat-label">Code Lines</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-target="24">0</div>
+                    <div class="stat-label">Hours/Day</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- -----------about---------- -->
+<div id="about">
+    <div class="container">
+        <div class="row">
+            <div class="about-col-1">
+                <img src="images/preston.jpg" alt="Preston Mwendwa">
+            </div>
+            <div class="about-col-2">
+                <h1 class="sub-title">About Me</h1>
+                <p>My name is Preston Mugo a computer science student at Riara University,Nairobi.</p>
+
+                <div class="tab-titles">
+                    <p class="tab-links active-link" onclick="opentab('skills')">Skills</p>
+                    <p class="tab-links" onclick="opentab('experience')">Experience</p>
+                    <p class="tab-links" onclick="opentab('education')">Education</p>
+                </div>
+                <div class="tab-contents active-tab" id="skills">
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span>UI/UX Design</span>
+                            <span class="skill-percent">90%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="90"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span>Web Development</span>
+                            <span class="skill-percent">85%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="85"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span>Content Creation</span>
+                            <span class="skill-percent">80%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="80"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span>JavaScript</span>
+                            <span class="skill-percent">88%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="88"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span>Python</span>
+                            <span class="skill-percent">75%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="75"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-contents" id="experience">
+                    <ul>
+                        <li><span>2024 - Current</span><br>Riara University</li>
+                        <li><span>2023 - 2024</span><br>Internship at Ministry of Foreign affairs.</li>
+                        <li><span>2017 - 2021</span><br>Student at Meru school.</li>
+                
+                    </ul>
+                </div>
+                <div class="tab-contents" id="education">
+                    <ul>
+                        <li><span>2021 - Current</span><br>Riara University</li>
+                        <li><span>2017 - 2021</span><br>Meru school</li>
+                        <li><span>2006 - 2017</span><br>Meru Saleem Academy</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ---------services---------------- -->
+<div id="services">
+    <div class="container">
+        <h1 class="sub-title">My Services</h1>
+        <div class="services-list">
+            <div>
+                <i class="fas fa-code"></i>
+                <h2>Web Design</h2>
+                <p>I specialize in creating visually stunning, responsive, and user-friendly websites that leave a lasting impression. My web design services focus on blending aesthetics with functionality to ensure your site not only looks amazing but also performs seamlessly across all devices. Whether you need a personal blog, a portfolio, or a full-scale business website, I tailor each design to meet your unique goals and brand identity..</p>
+                <a href="#" aria-label="Learn more about service">Learn more</a>
+            </div>
+            <div>
+                <i class="fas fa-crop-alt"></i>
+                <h2>UI/UX Design</h2>
+                <p>User experience is at the heart of everything I design. My UI/UX design services focus on understanding your users' needs to create intuitive, engaging, and efficient digital interfaces.</p>
+                <a href="#" aria-label="Learn more about service">Learn more</a>
+            </div>
+            <div>
+                <i class="fab fa-app-store"></i>
+                <h2>film making</h2>
+                <p>From concept to creation, I bring your ideas to life with intuitive and visually appealing videos.</p>
+                <a href="#" aria-label="Learn more about service">Learn more</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ----------portfolio------------ -->
+<div id="portfolio">
+    <div class="container">
+        <h1 class="sub-title">My Work</h1>
+        <div class="work-list">
+            <div class="work">
+                <img src="images/work-1.png" alt="Rental management system">
+                <div class="layer">
+                    <h3>Rental management system</h3>
+                    <p>The website offers a centralized platform for landlords and tenants to communicate efficiently.</p>
+                    <a href="#" aria-label="View project"><i class="fas fa-external-link-alt"></i></a>
+                </div>
+            </div>
+            <div class="work">
+                <img src="images/work-2.png" alt="Parking system">
+                <div class="layer">
+                    <h3>Parking system</h3>
+                    <p>The website Maximizes the use of parking areas, even in limited spaces, by organizing vehicle placement. .</p>
+                    <a href="#" aria-label="View project"><i class="fas fa-external-link-alt"></i></a>
+                </div>
+            </div>
+            <div class="work">
+                <img src="images/work-3.png" alt="Room management system">
+                <div class="layer">
+                    <h3>Room management system</h3>
+                    <p>The websites Streamlines property management by consolidating tenant information, payment records, and maintenance requests.</p>
+                    <a href="#" aria-label="View project"><i class="fas fa-external-link-alt"></i></a>
+                </div>
+            </div>
+        </div>
+        <a href="#" class="btn" aria-label="See more projects">See more</a>
+    </div>
+</div>
+<!-- ----------contact------------- -->
+<div id="contact">
+    <div class="container">
+        <div class="row">
+            <div class="contact-left">
+                <h1 class="sub-title">Contact Me</h1>
+                <p><i class="fas fa-paper-plane"></i> preston.mwendwa@riarauniversity.ac.ke</p>
+                <p><i class="fas fa-phone-square-alt"></i> 0706148538</p>
+                <div class="social-icons">
+                    <a href="https://facebook.com/" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                    <a href="" aria-label="Twitter"><i class="fab fa-twitter-square"></i></a>
+                    <a href="" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                </div>
+                <a href="images/my-cv.pdf" download class="btn btn2">Download CV</a>
+            </div>
+            <div class="contact-right">
+                <form name="submit-to-google-sheet">
+                    <input type="text" name="Name" placeholder="Your Name" required>
+                    <input type="email" name="Email" placeholder="Your Email" required>
+                    <textarea name="Message" rows="6" placeholder="Your Message"></textarea>
+                    <button type="submit" class="btn btn2">Submit</button>
+                </form>
+                <span id="msg"></span>
+            </div>
+        </div>
+    </div>
+    <div class="copyright">
+        <p>Copyright © Preston 
+    </div>
+</div>
+
+
+
+<script>
+
+    var tablinks = document.getElementsByClassName("tab-links");
+    var tabcontents = document.getElementsByClassName("tab-contents");
+
+    function opentab(tabname){
+        for(tablink of tablinks){
+            tablink.classList.remove("active-link");
+        }
+        for(tabcontent of tabcontents){
+            tabcontent.classList.remove("active-tab");
+        }
+        event.currentTarget.classList.add("active-link");
+        document.getElementById(tabname).classList.add("active-tab");
+    }
+
+</script>
+
+<script>
+
+    var sidemeu = document.getElementById("sidemenu");
+
+    function openmenu(){
+        sidemeu.style.right = "0";
+    }
+    function closemenu(){
+        sidemeu.style.right = "-200px";
+    }
+
+</script>
+<script>
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbx7XVsOTVtMiYDpRIN_te4lhY2goWBptvXnBRr9Can_6I2-hAsce9UJ7SCp81sCmunMuw/exec' // add your own app script link here
+    const form = document.forms['submit-to-google-sheet']
+    const msg = document.getElementById("msg")
+  
+    form.addEventListener('submit', e => {
+      e.preventDefault()
+      fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+        .then(response => {
+            msg.innerHTML = "Message sent successfully"
+            setTimeout(function(){
+                msg.innerHTML = ""
+            },5000)
+            form.reset()
+        })
+        .catch(error => console.error('Error!', error.message))
+    })
+  </script>
+
+<!-- Matrix Animation Script -->
+<script>
+    // Matrix Rain Effect
+    const canvas = document.getElementById('matrix-canvas');
+    const ctx = canvas.getContext('2d');
+    
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    
+    const matrix = "ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789@#$%^&*()*&^%+-/~{[|`]}";
+    const matrixArray = matrix.split("");
+    
+    const fontSize = 14;
+    const columns = canvas.width / fontSize;
+    
+    const drops = [];
+    for(let x = 0; x < columns; x++) {
+        drops[x] = 1;
+    }
+    
+    function draw() {
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.04)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        
+        ctx.fillStyle = '#00ff41';
+        ctx.font = fontSize + 'px monospace';
+        
+        for(let i = 0; i < drops.length; i++) {
+            const text = matrixArray[Math.floor(Math.random() * matrixArray.length)];
+            ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+            
+            if(drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                drops[i] = 0;
+            }
+            drops[i]++;
+        }
+    }
+    
+    setInterval(draw, 35);
+    
+    window.addEventListener('resize', () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    });
+    
+    // Particle Effect
+    const particlesCanvas = document.getElementById('particles-canvas');
+    const particlesCtx = particlesCanvas.getContext('2d');
+    
+    particlesCanvas.width = window.innerWidth;
+    particlesCanvas.height = window.innerHeight;
+    
+    const particles = [];
+    const particleCount = 50;
+    
+    class Particle {
+        constructor() {
+            this.x = Math.random() * particlesCanvas.width;
+            this.y = Math.random() * particlesCanvas.height;
+            this.size = Math.random() * 2 + 1;
+            this.speedX = Math.random() * 0.5 - 0.25;
+            this.speedY = Math.random() * 0.5 - 0.25;
+            this.opacity = Math.random() * 0.5 + 0.2;
+        }
+        
+        update() {
+            this.x += this.speedX;
+            this.y += this.speedY;
+            
+            if (this.x > particlesCanvas.width) this.x = 0;
+            if (this.x < 0) this.x = particlesCanvas.width;
+            if (this.y > particlesCanvas.height) this.y = 0;
+            if (this.y < 0) this.y = particlesCanvas.height;
+        }
+        
+        draw() {
+            particlesCtx.fillStyle = `rgba(0, 255, 65, ${this.opacity})`;
+            particlesCtx.beginPath();
+            particlesCtx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            particlesCtx.fill();
+        }
+    }
+    
+    for (let i = 0; i < particleCount; i++) {
+        particles.push(new Particle());
+    }
+    
+    function animateParticles() {
+        particlesCtx.clearRect(0, 0, particlesCanvas.width, particlesCanvas.height);
+        
+        particles.forEach(particle => {
+            particle.update();
+            particle.draw();
+        });
+        
+        // Draw connections
+        particlesCtx.strokeStyle = 'rgba(0, 255, 65, 0.1)';
+        particlesCtx.lineWidth = 0.5;
+        for (let i = 0; i < particles.length; i++) {
+            for (let j = i + 1; j < particles.length; j++) {
+                const dx = particles[i].x - particles[j].x;
+                const dy = particles[i].y - particles[j].y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                
+                if (distance < 100) {
+                    particlesCtx.beginPath();
+                    particlesCtx.moveTo(particles[i].x, particles[i].y);
+                    particlesCtx.lineTo(particles[j].x, particles[j].y);
+                    particlesCtx.stroke();
+                }
+            }
+        }
+        
+        requestAnimationFrame(animateParticles);
+    }
+    
+    animateParticles();
+    
+    window.addEventListener('resize', () => {
+        particlesCanvas.width = window.innerWidth;
+        particlesCanvas.height = window.innerHeight;
+    });
+</script>
+
+<!-- Typing Animation -->
+<script>
+    const typingElement = document.getElementById('typing');
+    const texts = [
+        'Computer Scientist',
+        'Web Developer',
+        'UI/UX Designer',
+        'Tech Enthusiast',
+        'Code Creator'
+    ];
+    let textIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+    
+    function typeText() {
+        const currentText = texts[textIndex];
+        
+        if (isDeleting) {
+            typingElement.textContent = currentText.substring(0, charIndex - 1);
+            charIndex--;
+        } else {
+            typingElement.textContent = currentText.substring(0, charIndex + 1);
+            charIndex++;
+        }
+        
+        if (!isDeleting && charIndex === currentText.length) {
+            isDeleting = true;
+            setTimeout(typeText, 2000);
+            return;
+        }
+        
+        if (isDeleting && charIndex === 0) {
+            isDeleting = false;
+            textIndex = (textIndex + 1) % texts.length;
+        }
+        
+        setTimeout(typeText, isDeleting ? 50 : 100);
+    }
+    
+    typeText();
+</script>
+
+<!-- Counter Animation -->
+<script>
+    function animateCounter(element) {
+        const target = parseInt(element.getAttribute('data-target'));
+        const duration = 2000;
+        const increment = target / (duration / 16);
+        let current = 0;
+        
+        const updateCounter = () => {
+            current += increment;
+            if (current < target) {
+                element.textContent = Math.floor(current) + (target >= 100 ? 'K+' : '+');
+                requestAnimationFrame(updateCounter);
+            } else {
+                element.textContent = target + (target >= 100 ? 'K+' : '+');
+            }
+        };
+        
+        updateCounter();
+    }
+    
+    // Intersection Observer for counter animation
+    const statsObserverOptions = {
+        threshold: 0.5
+    };
+    
+    const statsObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const counters = entry.target.querySelectorAll('.stat-number');
+                counters.forEach(counter => {
+                    if (!counter.classList.contains('animated')) {
+                        counter.classList.add('animated');
+                        animateCounter(counter);
+                    }
+                });
+            }
+        });
+    }, statsObserverOptions);
+    
+    const statsSection = document.querySelector('.tech-stats');
+    if (statsSection) {
+        statsObserver.observe(statsSection);
+    }
+</script>
+
+<!-- Skill Bar Animation -->
+<script>
+    const skillObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const progressBars = entry.target.querySelectorAll('.skill-progress');
+                progressBars.forEach(bar => {
+                    const width = bar.getAttribute('data-width');
+                    bar.style.width = width + '%';
+                });
+            }
+        });
+    }, { threshold: 0.5 });
+    
+    const aboutSection = document.getElementById('about');
+    if (aboutSection) {
+        skillObserver.observe(aboutSection);
+    }
+</script>
+
+<!-- Scroll Animations -->
+<script>
+    const fadeObserverOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -100px 0px'
+    };
+    
+    const fadeObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, fadeObserverOptions);
+    
+    document.querySelectorAll('.services-list > div, .work').forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(30px)';
+        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        fadeObserver.observe(el);
+    });
+</script>
+</body>
+</html>
