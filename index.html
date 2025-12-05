@@ -9,13 +9,46 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/c4254e24a8.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     
 </head>
 <body>
 <!-- Matrix Background Canvas -->
 <canvas id="matrix-canvas"></canvas>
 <canvas id="particles-canvas"></canvas>
+
+<!-- Interactive Terminal -->
+<div id="terminal" class="terminal-hidden">
+    <div class="terminal-header">
+        <div class="terminal-controls">
+            <span class="terminal-dot red"></span>
+            <span class="terminal-dot yellow"></span>
+            <span class="terminal-dot green"></span>
+        </div>
+        <span class="terminal-title">Terminal - preston@portfolio</span>
+        <button class="terminal-close" onclick="toggleTerminal()">×</button>
+    </div>
+    <div class="terminal-body" id="terminal-body">
+        <div class="terminal-line">
+            <span class="terminal-prompt">preston@portfolio:~$</span>
+            <span class="terminal-text">Welcome to Preston's Portfolio Terminal</span>
+        </div>
+        <div class="terminal-line">
+            <span class="terminal-prompt">preston@portfolio:~$</span>
+            <span class="terminal-text">Type 'help' for available commands</span>
+        </div>
+        <div class="terminal-line">
+            <span class="terminal-prompt">preston@portfolio:~$</span>
+            <span class="terminal-text terminal-cursor"></span>
+        </div>
+    </div>
+    <div class="terminal-input-container">
+        <span class="terminal-prompt">preston@portfolio:~$</span>
+        <label for="terminal-input" class="sr-only">Terminal command input</label>
+        <input type="text" id="terminal-input" class="terminal-input" autocomplete="off" spellcheck="false" placeholder="Type a command...">
+    </div>
+</div>
 
 <div id="header">
     <div class="container">
@@ -29,6 +62,24 @@
                 <li><a href="#contact">Contact</a></li>
                 <li><i class="fas fa-times" onclick="closemenu()" aria-label="Close menu"></i></li>
             </ul>
+            <div class="nav-controls">
+                <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme" title="Press 'T' to toggle theme">
+                    <i class="fas fa-palette"></i>
+                    <span class="button-label">Theme</span>
+                </button>
+                <button class="terminal-toggle" onclick="toggleTerminal()" aria-label="Open terminal" title="Press '~' to open terminal">
+                    <i class="fas fa-terminal"></i>
+                    <span class="button-label">Terminal</span>
+                </button>
+                <button class="voice-toggle" onclick="toggleVoiceCommands()" aria-label="Voice commands" title="Press 'V' for voice commands">
+                    <i class="fas fa-microphone"></i>
+                    <span class="button-label">Voice</span>
+                </button>
+                <button class="analytics-toggle" onclick="toggleAnalytics()" aria-label="Analytics" title="View analytics">
+                    <i class="fas fa-chart-line"></i>
+                    <span class="button-label">Stats</span>
+                </button>
+            </div>
             <i class="fas fa-bars" onclick="openmenu()"></i>
         </nav>
         <div class="header-text">
@@ -38,7 +89,7 @@
                 <div class="stat-item">
                     <div class="stat-number" data-target="50">0</div>
                     <div class="stat-label">Projects</div>
-                </div>
+        </div>
                 <div class="stat-item">
                     <div class="stat-number" data-target="100">0</div>
                     <div class="stat-label">Code Lines</div>
@@ -133,6 +184,448 @@
         </div>
     </div>
 </div>
+<!-- ---------Tech Stack---------------- -->
+<div id="tech-stack">
+    <div class="container">
+        <h1 class="sub-title">Tech Stack</h1>
+        <div class="tech-stack-grid">
+            <div class="tech-item" data-tech="HTML5">
+                <i class="fab fa-html5"></i>
+                <span>HTML5</span>
+            </div>
+            <div class="tech-item" data-tech="CSS3">
+                <i class="fab fa-css3-alt"></i>
+                <span>CSS3</span>
+            </div>
+            <div class="tech-item" data-tech="JavaScript">
+                <i class="fab fa-js"></i>
+                <span>JavaScript</span>
+            </div>
+            <div class="tech-item" data-tech="Python">
+                <i class="fab fa-python"></i>
+                <span>Python</span>
+            </div>
+            <div class="tech-item" data-tech="React">
+                <i class="fab fa-react"></i>
+                <span>React</span>
+            </div>
+            <div class="tech-item" data-tech="Node.js">
+                <i class="fab fa-node-js"></i>
+                <span>Node.js</span>
+            </div>
+            <div class="tech-item" data-tech="Git">
+                <i class="fab fa-git-alt"></i>
+                <span>Git</span>
+            </div>
+            <div class="tech-item" data-tech="GitHub">
+                <i class="fab fa-github"></i>
+                <span>GitHub</span>
+            </div>
+            <div class="tech-item" data-tech="VS Code">
+                <i class="fas fa-code"></i>
+                <span>VS Code</span>
+            </div>
+            <div class="tech-item" data-tech="Linux">
+                <i class="fab fa-linux"></i>
+                <span>Linux</span>
+            </div>
+            <div class="tech-item" data-tech="Docker">
+                <i class="fab fa-docker"></i>
+                <span>Docker</span>
+            </div>
+            <div class="tech-item" data-tech="AWS">
+                <i class="fab fa-aws"></i>
+                <span>AWS</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ---------Timeline/Journey---------------- -->
+<div id="timeline">
+    <div class="container">
+        <h1 class="sub-title">Tech Journey</h1>
+        <div class="timeline-container">
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <div class="timeline-date">2021 - Current</div>
+                    <h3>Riara University</h3>
+                    <p>Pursuing Computer Science degree. Learning advanced programming, algorithms, and software engineering principles.</p>
+                    <div class="timeline-tags">
+                        <span>Computer Science</span>
+                        <span>Programming</span>
+                        <span>Algorithms</span>
+                    </div>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <div class="timeline-date">2023 - 2024</div>
+                    <h3>Ministry of Foreign Affairs</h3>
+                    <p>Internship focusing on web development and system administration. Gained real-world experience in government tech infrastructure.</p>
+                    <div class="timeline-tags">
+                        <span>Web Development</span>
+                        <span>System Admin</span>
+                        <span>Internship</span>
+                    </div>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <div class="timeline-date">2017 - 2021</div>
+                    <h3>Meru School</h3>
+                    <p>High school education with focus on mathematics and sciences. Developed foundation for computer science studies.</p>
+                    <div class="timeline-tags">
+                        <span>Mathematics</span>
+                        <span>Science</span>
+                        <span>Foundation</span>
+                    </div>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <div class="timeline-date">2024</div>
+                    <h3>Portfolio Development</h3>
+                    <p>Created modern tech-themed portfolio showcasing skills in web development, UI/UX design, and innovative tech solutions.</p>
+                    <div class="timeline-tags">
+                        <span>Portfolio</span>
+                        <span>Web Design</span>
+                        <span>Innovation</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ---------GitHub Activity---------------- -->
+<div id="github-activity">
+    <div class="container">
+        <h1 class="sub-title">GitHub Activity</h1>
+        <div class="github-stats">
+            <div class="github-stat-card">
+                <i class="fab fa-github"></i>
+                <div class="stat-value" data-target="25">0</div>
+                <div class="stat-label">Repositories</div>
+            </div>
+            <div class="github-stat-card">
+                <i class="fas fa-code-branch"></i>
+                <div class="stat-value" data-target="150">0</div>
+                <div class="stat-label">Contributions</div>
+            </div>
+            <div class="github-stat-card">
+                <i class="fas fa-star"></i>
+                <div class="stat-value" data-target="42">0</div>
+                <div class="stat-label">Stars Earned</div>
+            </div>
+            <div class="github-stat-card">
+                <i class="fas fa-users"></i>
+                <div class="stat-value" data-target="8">0</div>
+                <div class="stat-label">Collaborators</div>
+            </div>
+        </div>
+        <div class="github-cta">
+            <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="btn github-btn">
+                <i class="fab fa-github"></i> View GitHub Profile
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- ---------Achievements/Badges---------------- -->
+<div id="achievements">
+    <div class="container">
+        <h1 class="sub-title">Achievements & Certifications</h1>
+        <div class="achievements-grid">
+            <div class="achievement-card">
+                <div class="achievement-icon">
+                    <i class="fas fa-certificate"></i>
+                </div>
+                <h3>Web Development</h3>
+                <p>Certified in modern web development technologies and frameworks</p>
+                <div class="achievement-badge">Certified</div>
+            </div>
+            <div class="achievement-card">
+                <div class="achievement-icon">
+                    <i class="fas fa-code"></i>
+                </div>
+                <h3>Programming Excellence</h3>
+                <p>Advanced skills in multiple programming languages</p>
+                <div class="achievement-badge">Expert</div>
+            </div>
+            <div class="achievement-card">
+                <div class="achievement-icon">
+                    <i class="fas fa-paint-brush"></i>
+                </div>
+                <h3>UI/UX Design</h3>
+                <p>Creating intuitive and visually appealing user interfaces</p>
+                <div class="achievement-badge">Designer</div>
+            </div>
+            <div class="achievement-card">
+                <div class="achievement-icon">
+                    <i class="fas fa-trophy"></i>
+                </div>
+                <h3>Tech Innovation</h3>
+                <p>Building innovative solutions for real-world problems</p>
+                <div class="achievement-badge">Innovator</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ---------Live Coding Challenge---------------- -->
+<div id="coding-challenge">
+    <div class="container">
+        <h1 class="sub-title">Live Coding Challenge</h1>
+        <p class="challenge-intro">Test your skills! Complete the challenge and see your score.</p>
+        
+        <div class="challenge-container">
+            <div class="challenge-sidebar">
+                <div class="challenge-info">
+                    <h3>Challenge: FizzBuzz</h3>
+                    <p>Write a function that prints numbers 1 to 100. For multiples of 3, print "Fizz". For multiples of 5, print "Buzz". For multiples of both, print "FizzBuzz".</p>
+                    <div class="challenge-example">
+                        <strong>Example Output:</strong>
+                        <pre>1, 2, Fizz, 4, Buzz, Fizz, 7, 8, Fizz, Buzz...</pre>
+                    </div>
+                </div>
+                <div class="challenge-stats">
+                    <div class="stat-box">
+                        <i class="fas fa-trophy"></i>
+                        <span id="challenge-score">Score: 0</span>
+                    </div>
+                    <div class="stat-box">
+                        <i class="fas fa-clock"></i>
+                        <span id="challenge-time">Time: 0s</span>
+                    </div>
+                </div>
+                <button class="btn challenge-btn" onclick="runChallenge()">Run Code</button>
+                <button class="btn challenge-btn" onclick="resetChallenge()">Reset</button>
+            </div>
+            
+            <div class="challenge-editor">
+                <div class="editor-header">
+                    <div class="editor-tabs">
+                        <span class="tab active">JavaScript</span>
+                    </div>
+                    <div class="editor-controls">
+            <button onclick="runChallenge()" class="run-btn" aria-label="Run code challenge">
+                <i class="fas fa-play"></i> Run
+            </button>
+                    </div>
+                </div>
+                <textarea id="code-editor" class="code-editor-textarea" placeholder="// Write your code here
+function fizzBuzz() {
+    // Your code here
+    return [];
+}
+
+// Test your function
+console.log(fizzBuzz());"></textarea>
+                <div class="editor-output">
+                    <div class="output-header">Output</div>
+                    <div id="challenge-output" class="output-content">
+                        <p class="output-placeholder">Run your code to see the output here...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ---------Typing Speed Game---------------- -->
+<div id="typing-game">
+    <div class="container">
+        <h1 class="sub-title">Typing Speed Challenge</h1>
+        <p class="game-intro">Test your typing speed with code snippets! How fast can you type?</p>
+        
+        <div class="game-container">
+            <div class="game-stats">
+                <div class="game-stat-box">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <div>
+                        <span class="stat-label">WPM</span>
+                        <span id="wpm-display" class="stat-value">0</span>
+                    </div>
+                </div>
+                <div class="game-stat-box">
+                    <i class="fas fa-percentage"></i>
+                    <div>
+                        <span class="stat-label">Accuracy</span>
+                        <span id="accuracy-display" class="stat-value">100%</span>
+                    </div>
+                </div>
+                <div class="game-stat-box">
+                    <i class="fas fa-clock"></i>
+                    <div>
+                        <span class="stat-label">Time</span>
+                        <span id="time-display" class="stat-value">0s</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="game-text-container">
+                <div class="game-text-display" id="game-text-display">
+                    <span class="typed-text" id="typed-text"></span>
+                    <span class="current-char" id="current-char"></span>
+                    <span class="remaining-text" id="remaining-text"></span>
+                </div>
+            </div>
+            
+            <div class="game-input-container">
+                <textarea 
+                    id="game-input" 
+                    class="game-input" 
+                    placeholder="Start typing here..."
+                    autocomplete="off"
+                    spellcheck="false"
+                ></textarea>
+            </div>
+            
+            <div class="game-controls">
+                <button class="btn game-btn" id="start-game-btn" onclick="startTypingGame()">
+                    <i class="fas fa-play"></i> Start Game
+                </button>
+                <button class="btn game-btn" id="reset-game-btn" onclick="resetTypingGame()">
+                    <i class="fas fa-redo"></i> Reset
+                </button>
+                <button class="btn game-btn" id="new-text-btn" onclick="loadNewText()">
+                    <i class="fas fa-sync"></i> New Text
+                </button>
+            </div>
+            
+            <div class="game-result" id="game-result">
+                <h3>Game Over!</h3>
+                <div class="result-stats">
+                    <div class="result-item">
+                        <span class="result-label">Final WPM:</span>
+                        <span class="result-value" id="final-wpm">0</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Accuracy:</span>
+                        <span class="result-value" id="final-accuracy">100%</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Time:</span>
+                        <span class="result-value" id="final-time">0s</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ---------Christmas Game---------------- -->
+<div id="christmas-game">
+    <div class="container">
+        <h1 class="sub-title">🎄 Christmas Special Game 🎄</h1>
+        <p class="game-intro">Match the Christmas icons and win exclusive discounts on our packages! 🎁</p>
+        
+        <div class="christmas-game-container">
+            <div class="game-info-bar">
+                <div class="game-stat">
+                    <i class="fas fa-heart"></i>
+                    <span>Moves: <span id="game-moves">0</span></span>
+                </div>
+                <div class="game-stat">
+                    <i class="fas fa-star"></i>
+                    <span>Matches: <span id="game-matches">0</span>/8</span>
+                </div>
+                <div class="game-stat">
+                    <i class="fas fa-gift"></i>
+                    <span id="game-status">Find all pairs!</span>
+                </div>
+            </div>
+            
+            <div class="memory-game-grid" id="memory-game">
+                <!-- Cards will be generated by JavaScript -->
+            </div>
+            
+            <div class="game-controls">
+                <button class="btn game-btn" id="start-christmas-game" onclick="startChristmasGame()">
+                    <i class="fas fa-play"></i> Start Game
+                </button>
+                <button class="btn game-btn" id="reset-christmas-game" onclick="resetChristmasGame()">
+                    <i class="fas fa-redo"></i> Play Again
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Christmas Reward Modal -->
+<div id="christmas-reward-modal" class="reward-modal">
+    <div class="reward-content">
+        <div class="reward-header">
+            <span class="reward-close" onclick="closeRewardModal()">×</span>
+        </div>
+        <div class="reward-body">
+            <div class="reward-icon">🎉</div>
+            <h2>Congratulations! You Won!</h2>
+            <p class="reward-message">You've unlocked a special Christmas discount!</p>
+            <div class="discount-code-box">
+                <p class="discount-label">Your Discount Code:</p>
+                <div class="discount-code" id="discount-code">CHRISTMAS2024</div>
+                <button class="btn copy-code-btn" onclick="copyDiscountCode()">
+                    <i class="fas fa-copy"></i> Copy Code
+                </button>
+            </div>
+            <p class="discount-info">Use this code when contacting us to get <strong id="discount-percent">20%</strong> off any package!</p>
+            <button class="btn reward-btn" onclick="goToPricing()">
+                <i class="fas fa-gift"></i> View Packages
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Christmas Snow Effect -->
+<canvas id="snow-canvas"></canvas>
+
+<!-- ---------Code Editor Demo---------------- -->
+<div id="code-demo">
+    <div class="container">
+        <h1 class="sub-title">Live Code Editor</h1>
+        <div class="code-editor-container">
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-dots">
+                        <span></span><span></span><span></span>
+                    </div>
+                    <span class="code-filename">portfolio.js</span>
+                </div>
+                <div class="code-content">
+                    <pre><code id="code-snippet"><span class="code-keyword">const</span> <span class="code-variable">preston</span> = {
+  <span class="code-property">name</span>: <span class="code-string">'Preston Mwendwa'</span>,
+  <span class="code-property">role</span>: <span class="code-string">'Computer Scientist'</span>,
+  <span class="code-property">location</span>: <span class="code-string">'Nairobi, Kenya'</span>,
+  <span class="code-property">skills</span>: [<span class="code-string">'Web Dev'</span>, <span class="code-string">'UI/UX'</span>, <span class="code-string">'Python'</span>],
+  <span class="code-property">passion</span>: <span class="code-string">'Creating innovative tech solutions'</span>
+};
+
+<span class="code-keyword">function</span> <span class="code-function">buildPortfolio</span>() {
+  <span class="code-keyword">return</span> <span class="code-string">'Amazing things ahead!'</span>;
+}
+
+<span class="code-comment">// Always learning, always coding</span>
+<span class="code-function">buildPortfolio</span>();</code></pre>
+                </div>
+            </div>
+            <div class="code-output">
+                <div class="code-output-header">Output</div>
+                <div class="code-output-content">
+                    <span class="output-line">$ node portfolio.js</span>
+                    <span class="output-line success">✓ Portfolio built successfully!</span>
+                    <span class="output-line">> Ready to showcase amazing projects</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- ---------services---------------- -->
 <div id="services">
     <div class="container">
@@ -159,6 +652,305 @@
         </div>
     </div>
 </div>
+
+<!-- ---------Pricing Packages---------------- -->
+<div id="pricing">
+    <div class="container">
+        <h1 class="sub-title">Web Development Packages</h1>
+        <p class="pricing-subtitle">Choose the perfect package for your website needs</p>
+        
+        <!-- Website Type Selector -->
+        <div class="website-type-selector">
+            <button class="type-btn active" data-type="portfolio" onclick="filterPackages('portfolio')">
+                <i class="fas fa-user-circle"></i> Portfolio
+            </button>
+            <button class="type-btn" data-type="business" onclick="filterPackages('business')">
+                <i class="fas fa-briefcase"></i> Business
+            </button>
+            <button class="type-btn" data-type="ecommerce" onclick="filterPackages('ecommerce')">
+                <i class="fas fa-shopping-cart"></i> E-commerce
+            </button>
+            <button class="type-btn" data-type="custom" onclick="filterPackages('custom')">
+                <i class="fas fa-cogs"></i> Custom
+            </button>
+        </div>
+
+        <!-- Portfolio Packages -->
+        <div class="pricing-grid" id="portfolio-packages">
+            <div class="pricing-card">
+                <div class="pricing-badge">Basic</div>
+                <div class="pricing-header">
+                    <h3>Portfolio Basic</h3>
+                    <div class="price">
+                        <span class="currency">KES</span>
+                        <span class="amount">15,000</span>
+                    </div>
+                    <p class="price-desc">Perfect for personal portfolios</p>
+                </div>
+                <ul class="pricing-features">
+                    <li><i class="fas fa-check"></i> Up to 5 pages</li>
+                    <li><i class="fas fa-check"></i> Responsive design</li>
+                    <li><i class="fas fa-check"></i> Contact form</li>
+                    <li><i class="fas fa-check"></i> Basic animations</li>
+                    <li><i class="fas fa-check"></i> Social media integration</li>
+                    <li><i class="fas fa-check"></i> 1 month support</li>
+                </ul>
+                <a href="#contact" class="pricing-btn" onclick="selectService('Portfolio Basic - KES 15,000')">Get Started</a>
+            </div>
+
+            <div class="pricing-card featured">
+                <div class="pricing-badge popular">Most Popular</div>
+                <div class="pricing-header">
+                    <h3>Portfolio Standard</h3>
+                    <div class="price">
+                        <span class="currency">KES</span>
+                        <span class="amount">25,000</span>
+                    </div>
+                    <p class="price-desc">Best for professionals</p>
+                </div>
+                <ul class="pricing-features">
+                    <li><i class="fas fa-check"></i> Up to 10 pages</li>
+                    <li><i class="fas fa-check"></i> Advanced animations</li>
+                    <li><i class="fas fa-check"></i> Portfolio gallery</li>
+                    <li><i class="fas fa-check"></i> Blog section</li>
+                    <li><i class="fas fa-check"></i> SEO optimization</li>
+                    <li><i class="fas fa-check"></i> Analytics integration</li>
+                    <li><i class="fas fa-check"></i> 3 months support</li>
+                </ul>
+                <a href="#contact" class="pricing-btn" onclick="selectService('Portfolio Standard - KES 25,000')">Get Started</a>
+            </div>
+
+            <div class="pricing-card">
+                <div class="pricing-badge">Premium</div>
+                <div class="pricing-header">
+                    <h3>Portfolio Premium</h3>
+                    <div class="price">
+                        <span class="currency">KES</span>
+                        <span class="amount">40,000</span>
+                    </div>
+                    <p class="price-desc">Ultimate portfolio experience</p>
+                </div>
+                <ul class="pricing-features">
+                    <li><i class="fas fa-check"></i> Unlimited pages</li>
+                    <li><i class="fas fa-check"></i> Custom animations</li>
+                    <li><i class="fas fa-check"></i> Interactive elements</li>
+                    <li><i class="fas fa-check"></i> CMS integration</li>
+                    <li><i class="fas fa-check"></i> Advanced SEO</li>
+                    <li><i class="fas fa-check"></i> Performance optimization</li>
+                    <li><i class="fas fa-check"></i> 6 months support</li>
+                </ul>
+                <a href="#contact" class="pricing-btn" onclick="selectService('Portfolio Premium - KES 40,000')">Get Started</a>
+            </div>
+        </div>
+
+        <!-- Business Packages -->
+        <div class="pricing-grid hidden" id="business-packages">
+            <div class="pricing-card">
+                <div class="pricing-badge">Starter</div>
+                <div class="pricing-header">
+                    <h3>Business Starter</h3>
+                    <div class="price">
+                        <span class="currency">KES</span>
+                        <span class="amount">30,000</span>
+                    </div>
+                    <p class="price-desc">Small business solution</p>
+                </div>
+                <ul class="pricing-features">
+                    <li><i class="fas fa-check"></i> Up to 8 pages</li>
+                    <li><i class="fas fa-check"></i> Responsive design</li>
+                    <li><i class="fas fa-check"></i> Contact forms</li>
+                    <li><i class="fas fa-check"></i> Google Maps integration</li>
+                    <li><i class="fas fa-check"></i> Social media links</li>
+                    <li><i class="fas fa-check"></i> Basic SEO</li>
+                    <li><i class="fas fa-check"></i> 2 months support</li>
+                </ul>
+                <a href="#contact" class="pricing-btn" onclick="selectService('Business Starter - KES 30,000')">Get Started</a>
+            </div>
+
+            <div class="pricing-card featured">
+                <div class="pricing-badge popular">Most Popular</div>
+                <div class="pricing-header">
+                    <h3>Business Professional</h3>
+                    <div class="price">
+                        <span class="currency">KES</span>
+                        <span class="amount">50,000</span>
+                    </div>
+                    <p class="price-desc">Complete business website</p>
+                </div>
+                <ul class="pricing-features">
+                    <li><i class="fas fa-check"></i> Up to 15 pages</li>
+                    <li><i class="fas fa-check"></i> Service pages</li>
+                    <li><i class="fas fa-check"></i> Team/About pages</li>
+                    <li><i class="fas fa-check"></i> Blog system</li>
+                    <li><i class="fas fa-check"></i> Advanced SEO</li>
+                    <li><i class="fas fa-check"></i> Analytics setup</li>
+                    <li><i class="fas fa-check"></i> Email integration</li>
+                    <li><i class="fas fa-check"></i> 4 months support</li>
+                </ul>
+                <a href="#contact" class="pricing-btn" onclick="selectService('Business Professional - KES 50,000')">Get Started</a>
+            </div>
+
+            <div class="pricing-card">
+                <div class="pricing-badge">Enterprise</div>
+                <div class="pricing-header">
+                    <h3>Business Enterprise</h3>
+                    <div class="price">
+                        <span class="currency">KES</span>
+                        <span class="amount">80,000</span>
+                    </div>
+                    <p class="price-desc">Full-featured business site</p>
+                </div>
+                <ul class="pricing-features">
+                    <li><i class="fas fa-check"></i> Unlimited pages</li>
+                    <li><i class="fas fa-check"></i> Custom features</li>
+                    <li><i class="fas fa-check"></i> Admin dashboard</li>
+                    <li><i class="fas fa-check"></i> Multi-language support</li>
+                    <li><i class="fas fa-check"></i> Advanced security</li>
+                    <li><i class="fas fa-check"></i> Performance optimization</li>
+                    <li><i class="fas fa-check"></i> 12 months support</li>
+                </ul>
+                <a href="#contact" class="pricing-btn" onclick="selectService('Business Enterprise - KES 80,000')">Get Started</a>
+            </div>
+        </div>
+
+        <!-- E-commerce Packages -->
+        <div class="pricing-grid hidden" id="ecommerce-packages">
+            <div class="pricing-card">
+                <div class="pricing-badge">Starter</div>
+                <div class="pricing-header">
+                    <h3>E-commerce Basic</h3>
+                    <div class="price">
+                        <span class="currency">KES</span>
+                        <span class="amount">60,000</span>
+                    </div>
+                    <p class="price-desc">Small online store</p>
+                </div>
+                <ul class="pricing-features">
+                    <li><i class="fas fa-check"></i> Up to 50 products</li>
+                    <li><i class="fas fa-check"></i> Shopping cart</li>
+                    <li><i class="fas fa-check"></i> Payment gateway</li>
+                    <li><i class="fas fa-check"></i> Order management</li>
+                    <li><i class="fas fa-check"></i> Basic inventory</li>
+                    <li><i class="fas fa-check"></i> 3 months support</li>
+                </ul>
+                <a href="#contact" class="pricing-btn" onclick="selectService('E-commerce Basic - KES 60,000')">Get Started</a>
+            </div>
+
+            <div class="pricing-card featured">
+                <div class="pricing-badge popular">Most Popular</div>
+                <div class="pricing-header">
+                    <h3>E-commerce Pro</h3>
+                    <div class="price">
+                        <span class="currency">KES</span>
+                        <span class="amount">100,000</span>
+                    </div>
+                    <p class="price-desc">Full-featured online store</p>
+                </div>
+                <ul class="pricing-features">
+                    <li><i class="fas fa-check"></i> Unlimited products</li>
+                    <li><i class="fas fa-check"></i> Advanced cart</li>
+                    <li><i class="fas fa-check"></i> Multiple payment methods</li>
+                    <li><i class="fas fa-check"></i> Inventory management</li>
+                    <li><i class="fas fa-check"></i> Customer accounts</li>
+                    <li><i class="fas fa-check"></i> Reviews & ratings</li>
+                    <li><i class="fas fa-check"></i> Shipping integration</li>
+                    <li><i class="fas fa-check"></i> 6 months support</li>
+                </ul>
+                <a href="#contact" class="pricing-btn" onclick="selectService('E-commerce Pro - KES 100,000')">Get Started</a>
+            </div>
+
+            <div class="pricing-card">
+                <div class="pricing-badge">Enterprise</div>
+                <div class="pricing-header">
+                    <h3>E-commerce Enterprise</h3>
+                    <div class="price">
+                        <span class="currency">KES</span>
+                        <span class="amount">150,000</span>
+                    </div>
+                    <p class="price-desc">Large-scale e-commerce</p>
+                </div>
+                <ul class="pricing-features">
+                    <li><i class="fas fa-check"></i> Unlimited products</li>
+                    <li><i class="fas fa-check"></i> Multi-vendor support</li>
+                    <li><i class="fas fa-check"></i> Advanced analytics</li>
+                    <li><i class="fas fa-check"></i> Custom features</li>
+                    <li><i class="fas fa-check"></i> API integration</li>
+                    <li><i class="fas fa-check"></i> Advanced security</li>
+                    <li><i class="fas fa-check"></i> 12 months support</li>
+                </ul>
+                <a href="#contact" class="pricing-btn" onclick="selectService('E-commerce Enterprise - KES 150,000')">Get Started</a>
+            </div>
+        </div>
+
+        <!-- Custom Packages -->
+        <div class="pricing-grid hidden" id="custom-packages">
+            <div class="pricing-card">
+                <div class="pricing-badge">Custom</div>
+                <div class="pricing-header">
+                    <h3>Custom Project</h3>
+                    <div class="price">
+                        <span class="currency">KES</span>
+                        <span class="amount">Quote</span>
+                    </div>
+                    <p class="price-desc">Tailored to your needs</p>
+                </div>
+                <ul class="pricing-features">
+                    <li><i class="fas fa-check"></i> Custom design</li>
+                    <li><i class="fas fa-check"></i> Unique features</li>
+                    <li><i class="fas fa-check"></i> Full consultation</li>
+                    <li><i class="fas fa-check"></i> Flexible timeline</li>
+                    <li><i class="fas fa-check"></i> Ongoing support</li>
+                    <li><i class="fas fa-check"></i> Maintenance plans</li>
+                </ul>
+                <a href="#contact" class="pricing-btn" onclick="selectService('Custom Project - Quote Based')">Get Quote</a>
+            </div>
+
+            <div class="pricing-card">
+                <div class="pricing-badge">Maintenance</div>
+                <div class="pricing-header">
+                    <h3>Website Maintenance</h3>
+                    <div class="price">
+                        <span class="currency">KES</span>
+                        <span class="amount">5,000</span>
+                        <span class="period">/month</span>
+                    </div>
+                    <p class="price-desc">Keep your site running smoothly</p>
+                </div>
+                <ul class="pricing-features">
+                    <li><i class="fas fa-check"></i> Regular updates</li>
+                    <li><i class="fas fa-check"></i> Security patches</li>
+                    <li><i class="fas fa-check"></i> Backup services</li>
+                    <li><i class="fas fa-check"></i> Performance monitoring</li>
+                    <li><i class="fas fa-check"></i> Content updates</li>
+                    <li><i class="fas fa-check"></i> 24/7 support</li>
+                </ul>
+                <a href="#contact" class="pricing-btn" onclick="selectService('Website Maintenance - KES 5,000/month')">Get Started</a>
+            </div>
+
+            <div class="pricing-card">
+                <div class="pricing-badge">Redesign</div>
+                <div class="pricing-header">
+                    <h3>Website Redesign</h3>
+                    <div class="price">
+                        <span class="currency">KES</span>
+                        <span class="amount">35,000</span>
+                    </div>
+                    <p class="price-desc">Modernize your existing site</p>
+                </div>
+                <ul class="pricing-features">
+                    <li><i class="fas fa-check"></i> Modern design</li>
+                    <li><i class="fas fa-check"></i> Responsive upgrade</li>
+                    <li><i class="fas fa-check"></i> Performance boost</li>
+                    <li><i class="fas fa-check"></i> SEO improvement</li>
+                    <li><i class="fas fa-check"></i> Content migration</li>
+                    <li><i class="fas fa-check"></i> 3 months support</li>
+                </ul>
+                <a href="#contact" class="pricing-btn" onclick="selectService('Website Redesign - KES 35,000')">Get Started</a>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- ----------portfolio------------ -->
 <div id="portfolio">
     <div class="container">
@@ -198,8 +990,33 @@
         <div class="row">
             <div class="contact-left">
                 <h1 class="sub-title">Contact Me</h1>
-                <p><i class="fas fa-paper-plane"></i> preston.mwendwa@riarauniversity.ac.ke</p>
-                <p><i class="fas fa-phone-square-alt"></i> 0706148538</p>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-paper-plane"></i>
+                        <div>
+                            <span class="contact-label">Email</span>
+                            <span class="contact-value">preston.mwendwa@riarauniversity.ac.ke</span>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone-square-alt"></i>
+                        <div>
+                            <span class="contact-label">Phone</span>
+                            <span class="contact-value">0706148538</span>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <span class="contact-label">Location</span>
+                            <span class="contact-value">Nairobi, Kenya</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="visitor-counter">
+                    <i class="fas fa-eye"></i>
+                    <span>Visitors: <span id="visitor-count">1,234</span></span>
+                </div>
                 <div class="social-icons">
                     <a href="https://facebook.com/" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
                     <a href="" aria-label="Twitter"><i class="fab fa-twitter-square"></i></a>
@@ -209,11 +1026,40 @@
                 <a href="images/my-cv.pdf" download class="btn btn2">Download CV</a>
             </div>
             <div class="contact-right">
-                <form name="submit-to-google-sheet">
-                    <input type="text" name="Name" placeholder="Your Name" required>
-                    <input type="email" name="Email" placeholder="Your Email" required>
-                    <textarea name="Message" rows="6" placeholder="Your Message"></textarea>
-                    <button type="submit" class="btn btn2">Submit</button>
+                <form id="contact-form">
+                    <label for="service-select" class="sr-only">Select Service Package</label>
+                    <select name="service" id="service-select" required aria-label="Select Service Package">
+                        <option value="">Select a Service Package</option>
+                        <optgroup label="Portfolio Packages">
+                            <option value="Portfolio Basic - KES 15,000">Portfolio Basic - KES 15,000</option>
+                            <option value="Portfolio Standard - KES 25,000">Portfolio Standard - KES 25,000</option>
+                            <option value="Portfolio Premium - KES 40,000">Portfolio Premium - KES 40,000</option>
+                        </optgroup>
+                        <optgroup label="Business Packages">
+                            <option value="Business Starter - KES 30,000">Business Starter - KES 30,000</option>
+                            <option value="Business Professional - KES 50,000">Business Professional - KES 50,000</option>
+                            <option value="Business Enterprise - KES 80,000">Business Enterprise - KES 80,000</option>
+                        </optgroup>
+                        <optgroup label="E-commerce Packages">
+                            <option value="E-commerce Basic - KES 60,000">E-commerce Basic - KES 60,000</option>
+                            <option value="E-commerce Pro - KES 100,000">E-commerce Pro - KES 100,000</option>
+                            <option value="E-commerce Enterprise - KES 150,000">E-commerce Enterprise - KES 150,000</option>
+                        </optgroup>
+                        <optgroup label="Other Services">
+                            <option value="Custom Project - Quote Based">Custom Project - Quote Based</option>
+                            <option value="Website Maintenance - KES 5,000/month">Website Maintenance - KES 5,000/month</option>
+                            <option value="Website Redesign - KES 35,000">Website Redesign - KES 35,000</option>
+                        </optgroup>
+                    </select>
+                    <input type="text" name="from_name" id="from_name" placeholder="Your Name" required>
+                    <input type="email" name="from_email" id="from_email" placeholder="Your Email" required>
+                    <textarea name="message" id="message" rows="6" placeholder="Your Message" required></textarea>
+                    <button type="submit" class="btn btn2">
+                        <span class="btn-text">Submit</span>
+                        <span class="btn-loader">
+                            <i class="fas fa-spinner fa-spin"></i> Sending...
+                        </span>
+                    </button>
                 </form>
                 <span id="msg"></span>
             </div>
@@ -223,6 +1069,128 @@
         <p>Copyright © Preston 
     </div>
 </div>
+
+<!-- WhatsApp Floating Button -->
+<a href="https://wa.me/254706148538?text=Hi%20Preston,%20I'm%20interested%20in%20your%20web%20development%20services" 
+   target="_blank" 
+   rel="noopener noreferrer" 
+   class="whatsapp-float" 
+   aria-label="Contact on WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+    <span class="whatsapp-tooltip">Chat on WhatsApp</span>
+</a>
+
+<!-- Live Chat Widget -->
+<div id="live-chat" class="chat-closed">
+    <div class="chat-header" onclick="toggleChat()">
+        <div class="chat-title">
+            <i class="fas fa-comments"></i>
+            <span>Live Chat</span>
+            <span class="chat-badge" id="chat-badge">1</span>
+        </div>
+        <button class="chat-toggle" aria-label="Toggle chat">
+            <i class="fas fa-chevron-down"></i>
+        </button>
+    </div>
+    <div class="chat-body">
+        <div class="chat-messages" id="chat-messages">
+            <div class="chat-message bot">
+                <div class="message-avatar">P</div>
+                <div class="message-content">
+                    <p>Hi! I'm Preston. How can I help you today?</p>
+                    <span class="message-time">Just now</span>
+                </div>
+            </div>
+        </div>
+        <div class="chat-input-container">
+            <input type="text" id="chat-input" placeholder="Type your message..." class="chat-input">
+            <button onclick="sendChatMessage()" class="chat-send" aria-label="Send message">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+        <div class="chat-quick-replies">
+            <button class="quick-reply" onclick="sendQuickReply('Tell me about your services')">Services</button>
+            <button class="quick-reply" onclick="sendQuickReply('What are your prices?')">Pricing</button>
+            <button class="quick-reply" onclick="sendQuickReply('Show me your portfolio')">Portfolio</button>
+        </div>
+    </div>
+</div>
+
+<!-- Voice Commands Indicator -->
+<div id="voice-indicator" class="voice-hidden">
+    <div class="voice-pulse"></div>
+    <i class="fas fa-microphone"></i>
+    <span>Listening...</span>
+</div>
+
+<!-- Analytics Dashboard (Admin View) -->
+<div id="analytics-dashboard" class="analytics-hidden">
+    <div class="analytics-header">
+        <h3><i class="fas fa-chart-line"></i> Analytics Dashboard</h3>
+        <button onclick="toggleAnalytics()" class="analytics-close">×</button>
+    </div>
+    <div class="analytics-content">
+        <div class="analytics-grid">
+            <div class="analytics-card">
+                <div class="analytics-icon"><i class="fas fa-users"></i></div>
+                <div class="analytics-value" id="total-visitors">0</div>
+                <div class="analytics-label">Total Visitors</div>
+            </div>
+            <div class="analytics-card">
+                <div class="analytics-icon"><i class="fas fa-eye"></i></div>
+                <div class="analytics-value" id="page-views">0</div>
+                <div class="analytics-label">Page Views</div>
+            </div>
+            <div class="analytics-card">
+                <div class="analytics-icon"><i class="fas fa-clock"></i></div>
+                <div class="analytics-value" id="avg-time">0m</div>
+                <div class="analytics-label">Avg. Time</div>
+            </div>
+            <div class="analytics-card">
+                <div class="analytics-icon"><i class="fas fa-mouse-pointer"></i></div>
+                <div class="analytics-value" id="clicks">0</div>
+                <div class="analytics-label">Total Clicks</div>
+            </div>
+        </div>
+        <div class="analytics-section">
+            <h4>Popular Sections</h4>
+            <div id="popular-sections" class="popular-list"></div>
+        </div>
+        <div class="analytics-section">
+            <h4>Recent Activity</h4>
+            <div id="recent-activity" class="activity-list"></div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Social Proof Widget -->
+<div class="social-proof">
+    <div class="proof-item">
+        <i class="fas fa-users"></i>
+        <span><span id="live-visitors">12</span> people viewing</span>
+    </div>
+    <div class="proof-item">
+        <i class="fas fa-clock"></i>
+        <span>Last activity: <span id="last-activity">2 min ago</span></span>
+    </div>
+    <div class="proof-item">
+        <i class="fas fa-star"></i>
+        <span><span id="total-views">1,234</span> total views</span>
+    </div>
+</div>
+
+<!-- Fun Interactive Cursor Trail -->
+<div class="cursor-trail"></div>
+
+<!-- Interactive Mouse Follower -->
+<div class="mouse-follower"></div>
+
+<!-- Floating Particles -->
+<div class="floating-particles"></div>
+
+<!-- Interactive Background Grid -->
+<div class="interactive-grid"></div>
 
 
 
@@ -256,24 +1224,74 @@
     }
 
 </script>
+<!-- EmailJS Configuration -->
 <script>
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbx7XVsOTVtMiYDpRIN_te4lhY2goWBptvXnBRr9Can_6I2-hAsce9UJ7SCp81sCmunMuw/exec' // add your own app script link here
-    const form = document.forms['submit-to-google-sheet']
-    const msg = document.getElementById("msg")
-  
-    form.addEventListener('submit', e => {
-      e.preventDefault()
-      fetch(scriptURL, { method: 'POST', body: new FormData(form)})
-        .then(response => {
-            msg.innerHTML = "Message sent successfully"
+    // Initialize EmailJS
+    (function(){
+        emailjs.init("S28nx8TWnsKEpl8vV"); // EmailJS Public Key
+    })();
+
+    const contactForm = document.getElementById('contact-form');
+    const msg = document.getElementById("msg");
+    const btnText = contactForm.querySelector('.btn-text');
+    const btnLoader = contactForm.querySelector('.btn-loader');
+    const submitBtn = contactForm.querySelector('button[type="submit"]');
+
+    contactForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Show loading state
+        btnText.style.display = 'none';
+        btnLoader.classList.add('show');
+        submitBtn.disabled = true;
+        msg.innerHTML = '';
+        msg.classList.remove('error');
+        
+        // Get form values
+        const service = document.getElementById('service-select').value;
+        const templateParams = {
+            from_name: document.getElementById('from_name').value,
+            from_email: document.getElementById('from_email').value,
+            service: service || 'Not specified',
+            message: document.getElementById('message').value,
+            to_email: 'prestonmugo33@gmail.com'
+        };
+
+        // Send email using EmailJS
+        emailjs.send('service_xc8nrxm', 'template_gaq4yle', templateParams)
+            .then(function(response) {
+                // Success - Sweet message
+                msg.innerHTML = '<i class="fas fa-check-circle"></i> <strong>Thank you so much!</strong> Your message has been sent successfully. I\'m excited to connect with you and will get back to you as soon as possible. TOP SHOTTA!! 😊';
+                msg.style.color = 'var(--primary-color)';
+                msg.classList.remove('error');
+                contactForm.reset();
+                
+                // Reset button state
+                btnText.style.display = 'inline';
+                btnLoader.classList.remove('show');
+                submitBtn.disabled = false;
+                
+                // Scroll to message for better visibility
+                msg.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                
+                // Clear message after 8 seconds (longer for sweet message)
             setTimeout(function(){
-                msg.innerHTML = ""
-            },5000)
-            form.reset()
-        })
-        .catch(error => console.error('Error!', error.message))
-    })
-  </script>
+                    msg.innerHTML = '';
+                }, 8000);
+            }, function(error) {
+                // Error
+                msg.innerHTML = '<i class="fas fa-exclamation-circle"></i> Failed to send message. Please try again or email me directly.';
+                msg.classList.add('error');
+                
+                // Reset button state
+                btnText.style.display = 'inline';
+                btnLoader.classList.remove('show');
+                submitBtn.disabled = false;
+                
+                console.error('EmailJS Error:', error);
+            });
+    });
+</script>
 
 <!-- Matrix Animation Script -->
 <script>
@@ -530,5 +1548,1622 @@
         fadeObserver.observe(el);
     });
 </script>
+
+<!-- Terminal Functionality -->
+<script>
+    let terminalOpen = false;
+    let terminal, terminalInput, terminalBody;
+    
+    // Make toggleTerminal globally accessible
+    window.toggleTerminal = function() {
+        if (!terminal) {
+            initTerminal();
+            terminal = document.getElementById('terminal');
+            terminalInput = document.getElementById('terminal-input');
+            terminalBody = document.getElementById('terminal-body');
+        }
+        if (!terminal) return;
+        
+        terminalOpen = !terminalOpen;
+        if (terminalOpen) {
+            terminal.classList.remove('terminal-hidden');
+            if (terminalInput) terminalInput.focus();
+        } else {
+            closeTerminal();
+        }
+    };
+    
+    // Initialize terminal elements when DOM is ready
+    function initTerminal() {
+        terminal = document.getElementById('terminal');
+        terminalInput = document.getElementById('terminal-input');
+        terminalBody = document.getElementById('terminal-body');
+        
+        if (!terminal || !terminalInput || !terminalBody) {
+            console.error('Terminal elements not found');
+            return;
+        }
+        
+        setupTerminalEvents();
+    }
+    
+    function setupTerminalEvents() {
+    
+    const commands = {
+        help: () => `
+Available commands:
+  help          - Show this help message
+  about         - About Preston
+  skills        - View technical skills
+  projects      - View projects
+  contact       - Contact information
+  clear         - Clear terminal
+  theme         - Change theme
+  github        - Open GitHub profile
+  resume        - Download resume
+  date          - Show current date
+  whoami        - Display user info
+  ls            - List directory
+  echo [text]   - Echo text
+  matrix        - Enable matrix mode
+  exit          - Close terminal`,
+        
+        about: () => `Preston Mwendwa - Computer Science Student
+Location: Nairobi, Kenya
+University: Riara University
+Passion: Web Development, UI/UX Design, Tech Innovation`,
+        
+        skills: () => `Technical Skills:
+  • UI/UX Design (90%)
+  • Web Development (85%)
+  • JavaScript (88%)
+  • Python (75%)
+  • Content Creation (80%)`,
+        
+        projects: () => `Featured Projects:
+  1. Rental Management System
+  2. Parking System
+  3. Room Management System
+  
+  Visit the Portfolio section for more details!`,
+        
+        contact: () => `Contact Information:
+  Email: preston.mwendwa@riarauniversity.ac.ke
+  Phone: 0706148538
+  Location: Nairobi, Kenya`,
+        
+        date: () => new Date().toLocaleString(),
+        
+        whoami: () => 'preston',
+        
+        ls: () => `portfolio/
+  ├── index.html
+  ├── style.css
+  ├── images/
+  └── projects/`,
+        
+        matrix: () => {
+            document.getElementById('matrix-canvas').style.opacity = '0.5';
+            return 'Matrix mode enabled! Background intensity increased.';
+        }
+    };
+    
+    // Initialize terminal on page load
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initTerminal);
+    } else {
+        initTerminal();
+    }
+    
+    function addTerminalLine(prompt, text, className = '') {
+        const line = document.createElement('div');
+        line.className = 'terminal-line ' + className;
+        line.innerHTML = `<span class="terminal-prompt">${prompt}</span><span class="terminal-text">${text}</span>`;
+        terminalBody.appendChild(line);
+        terminalBody.scrollTop = terminalBody.scrollHeight;
+    }
+    
+        terminalInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                const command = terminalInput.value.trim();
+                const commandLower = command.toLowerCase();
+                const args = commandLower.split(' ');
+                const cmd = args[0];
+                
+                addTerminalLine('preston@portfolio:~$', command);
+                
+                if (cmd === 'clear') {
+                    terminalBody.innerHTML = '';
+                } else if (cmd === 'exit' || cmd === 'quit' || cmd === 'close') {
+                    addTerminalLine('', 'Closing terminal...');
+                    setTimeout(() => {
+                        closeTerminal();
+                    }, 200);
+                } else if (cmd === 'echo') {
+                    addTerminalLine('', args.slice(1).join(' '));
+                } else if (cmd === 'github') {
+                    window.open('https://github.com', '_blank', 'noopener,noreferrer');
+                    addTerminalLine('', 'Opening GitHub...');
+                } else if (cmd === 'resume') {
+                    const link = document.createElement('a');
+                    link.href = 'images/my-cv.pdf';
+                    link.download = 'Preston_Mwendwa_CV.pdf';
+                    link.click();
+                    addTerminalLine('', 'Downloading resume...');
+                } else if (cmd === 'theme') {
+                    if (typeof window.toggleTheme === 'function') {
+                        window.toggleTheme();
+                        addTerminalLine('', 'Theme toggled!');
+                    }
+                } else if (commands[cmd]) {
+                    const output = commands[cmd]();
+                    addTerminalLine('', output);
+                } else if (command) {
+                    addTerminalLine('', `Command not found: ${command}. Type 'help' for available commands.`);
+                }
+                
+                terminalInput.value = '';
+            }
+        });
+    }
+    
+    function closeTerminal() {
+        terminalOpen = false;
+        if (terminal) {
+            terminal.classList.add('terminal-hidden');
+        }
+        if (terminalInput) {
+            terminalInput.blur();
+        }
+    }
+    
+    // Keyboard shortcuts
+    document.addEventListener('keydown', (e) => {
+        // Tilde key (~) to toggle terminal
+        if (e.key === '`' || e.key === '~') {
+            e.preventDefault();
+            if (typeof window.toggleTerminal === 'function') {
+                window.toggleTerminal();
+            }
+        }
+        // T key to toggle theme
+        if (e.key === 't' || e.key === 'T') {
+            const activeElement = document.activeElement;
+            if (!activeElement || (activeElement.tagName !== 'INPUT' && activeElement.tagName !== 'TEXTAREA')) {
+                if (typeof window.toggleTheme === 'function') {
+                    window.toggleTheme();
+                }
+            }
+        }
+        // Escape to close terminal
+        if (e.key === 'Escape' && terminalOpen) {
+            if (typeof window.toggleTerminal === 'function') {
+                window.toggleTerminal();
+            }
+        }
+    });
+</script>
+
+<!-- Theme Toggle -->
+<script>
+    let currentTheme = 'matrix';
+    const themes = {
+        matrix: {
+            primary: '#00ff41',
+            secondary: '#00ffff',
+            bg: '#000000'
+        },
+        cyber: {
+            primary: '#ff0080',
+            secondary: '#00ffff',
+            bg: '#0a0a0a'
+        },
+        neon: {
+            primary: '#ff00ff',
+            secondary: '#00ffff',
+            bg: '#000000'
+        },
+        hacker: {
+            primary: '#00ff00',
+            secondary: '#ffff00',
+            bg: '#001100'
+        }
+    };
+    
+    // Make toggleTheme globally accessible
+    window.toggleTheme = function() {
+        const themeNames = Object.keys(themes);
+        const currentIndex = themeNames.indexOf(currentTheme);
+        currentTheme = themeNames[(currentIndex + 1) % themeNames.length];
+        applyTheme(themes[currentTheme]);
+    };
+    
+    function applyTheme(theme) {
+        document.documentElement.style.setProperty('--primary-color', theme.primary);
+        document.documentElement.style.setProperty('--secondary-color', theme.secondary);
+        document.documentElement.style.setProperty('--bg-color', theme.bg);
+    }
+</script>
+
+<!-- Tech Stack Hover Effects -->
+<script>
+    document.querySelectorAll('.tech-item').forEach(item => {
+        item.addEventListener('mouseenter', function() {
+            const tech = this.getAttribute('data-tech');
+            this.style.transform = 'translateY(-10px) scale(1.1)';
+        });
+        
+        item.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0) scale(1)';
+        });
+    });
+</script>
+
+<!-- GitHub Stats Counter -->
+<script>
+    function animateStatCounter(element) {
+        const target = parseInt(element.getAttribute('data-target'));
+        const duration = 2000;
+        const increment = target / (duration / 16);
+        let current = 0;
+        
+        const updateCounter = () => {
+            current += increment;
+            if (current < target) {
+                element.textContent = Math.floor(current);
+                requestAnimationFrame(updateCounter);
+            } else {
+                element.textContent = target;
+            }
+        };
+        
+        updateCounter();
+    }
+    
+    const githubStatsObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const counters = entry.target.querySelectorAll('.stat-value');
+                counters.forEach(counter => {
+                    if (!counter.classList.contains('animated')) {
+                        counter.classList.add('animated');
+                        animateStatCounter(counter);
+                    }
+                });
+            }
+        });
+    }, { threshold: 0.5 });
+    
+    const githubSection = document.getElementById('github-activity');
+    if (githubSection) {
+        githubStatsObserver.observe(githubSection);
+    }
+</script>
+
+<!-- Visitor Counter (Simulated) -->
+<script>
+    // Simulated visitor counter - in production, connect to a backend API
+    function updateVisitorCount() {
+        const counter = document.getElementById('visitor-count');
+        if (counter) {
+            // Get from localStorage or generate random number
+            let count = localStorage.getItem('visitorCount');
+            if (!count) {
+                count = Math.floor(Math.random() * 5000) + 1000;
+                localStorage.setItem('visitorCount', count);
+            }
+            count = parseInt(count) + Math.floor(Math.random() * 3);
+            localStorage.setItem('visitorCount', count);
+            
+            // Animate counter
+            const target = count;
+            let current = parseInt(counter.textContent.replace(/,/g, '')) || 0;
+            const increment = (target - current) / 30;
+            
+            const update = () => {
+                current += increment;
+                if (Math.abs(target - current) > 1) {
+                    counter.textContent = Math.floor(current).toLocaleString();
+                    requestAnimationFrame(update);
+                } else {
+                    counter.textContent = target.toLocaleString();
+                }
+            };
+            update();
+        }
+    }
+    
+    // Update visitor count on page load
+    window.addEventListener('load', () => {
+        setTimeout(updateVisitorCount, 1000);
+    });
+</script>
+
+<!-- Pricing Package Filter -->
+<script>
+    function filterPackages(type) {
+        // Hide all packages
+        document.querySelectorAll('.pricing-grid').forEach(grid => {
+            grid.classList.add('hidden');
+        });
+        
+        // Remove active class from all buttons
+        document.querySelectorAll('.type-btn').forEach(btn => {
+            btn.classList.remove('active');
+        });
+        
+        // Show selected packages
+        document.getElementById(type + '-packages').classList.remove('hidden');
+        
+        // Add active class to clicked button
+        event.target.classList.add('active');
+        
+        // Smooth scroll to pricing section
+        document.getElementById('pricing').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+    
+    // Service Selection Function
+    function selectService(serviceName) {
+        const serviceSelect = document.getElementById('service-select');
+        if (serviceSelect) {
+            serviceSelect.value = serviceName;
+            // Scroll to contact form
+            setTimeout(() => {
+                document.getElementById('contact').scrollIntoView({ behavior: 'smooth', block: 'start' });
+                // Highlight the select field
+                serviceSelect.focus();
+                serviceSelect.style.borderColor = 'var(--primary-color)';
+                serviceSelect.style.boxShadow = '0 0 20px var(--primary-color)';
+                setTimeout(() => {
+                    serviceSelect.style.borderColor = '';
+                    serviceSelect.style.boxShadow = '';
+                }, 2000);
+            }, 100);
+        }
+    }
+</script>
+
+<!-- Timeline Animation -->
+<script>
+    const timelineObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry, index) => {
+            if (entry.isIntersecting) {
+                setTimeout(() => {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateX(0)';
+                }, index * 200);
+            }
+        });
+    }, { threshold: 0.1 });
+    
+    document.querySelectorAll('.timeline-item').forEach(item => {
+        item.style.opacity = '0';
+        item.style.transform = 'translateX(-50px)';
+        item.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        timelineObserver.observe(item);
+    });
+</script>
+
+<!-- Fun Interactive Features -->
+<script>
+    // Cursor Trail Effect
+    const cursorTrail = document.querySelector('.cursor-trail');
+    let trailElements = [];
+    
+    document.addEventListener('mousemove', (e) => {
+        const trail = document.createElement('div');
+        trail.className = 'trail-dot';
+        trail.style.left = e.clientX + 'px';
+        trail.style.top = e.clientY + 'px';
+        document.body.appendChild(trail);
+        
+        setTimeout(() => {
+            trail.remove();
+        }, 500);
+    });
+    
+    // Click Confetti Effect
+    function createConfetti(x, y) {
+        const colors = ['#00ff41', '#00ffff', '#ff00ff', '#ffff00'];
+        for (let i = 0; i < 20; i++) {
+            const confetti = document.createElement('div');
+            confetti.className = 'confetti';
+            confetti.style.left = x + 'px';
+            confetti.style.top = y + 'px';
+            confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
+            confetti.style.animation = `confetti-fall ${0.5 + Math.random()}s ease-out forwards`;
+            document.body.appendChild(confetti);
+            
+            setTimeout(() => confetti.remove(), 1000);
+        }
+    }
+    
+    // Add confetti on button clicks
+    document.querySelectorAll('button, .btn, .pricing-btn, a[href="#contact"]').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            const rect = this.getBoundingClientRect();
+            createConfetti(rect.left + rect.width / 2, rect.top + rect.height / 2);
+        });
+    });
+    
+    // Fun hover effects on interactive elements
+    document.querySelectorAll('a, button, .work, .pricing-card, .tech-item').forEach(el => {
+        el.addEventListener('mouseenter', function() {
+            this.style.transition = 'all 0.3s ease';
+        });
+    });
+    
+    // Random matrix character on click
+    document.addEventListener('click', (e) => {
+        if (Math.random() > 0.95) { // 5% chance
+            const char = String.fromCharCode(0x30A0 + Math.random() * 96);
+            const span = document.createElement('span');
+            span.textContent = char;
+            span.style.position = 'fixed';
+            span.style.left = e.clientX + 'px';
+            span.style.top = e.clientY + 'px';
+            span.style.color = '#00ff41';
+            span.style.fontSize = '20px';
+            span.style.pointerEvents = 'none';
+            span.style.zIndex = '9999';
+            span.style.animation = 'float-up 1s ease-out forwards';
+            document.body.appendChild(span);
+            setTimeout(() => span.remove(), 1000);
+        }
+    });
+    
+    // Fun typing effect on page load
+    window.addEventListener('load', () => {
+        const funMessages = [
+            'Welcome to the Matrix...',
+            'Code is poetry...',
+            'Building the future...',
+            'Tech enthusiast mode: ON',
+            'Ready to create magic!'
+        ];
+        const randomMsg = funMessages[Math.floor(Math.random() * funMessages.length)];
+        console.log(`%c${randomMsg}`, 'color: #00ff41; font-size: 20px; font-weight: bold; text-shadow: 0 0 10px #00ff41;');
+    });
+    
+    // Interactive Mouse Follower with Glow
+    const mouseFollower = document.querySelector('.mouse-follower');
+    let mouseX = 0, mouseY = 0;
+    let followerX = 0, followerY = 0;
+    
+    document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+    });
+    
+    function animateFollower() {
+        followerX += (mouseX - followerX) * 0.1;
+        followerY += (mouseY - followerY) * 0.1;
+        mouseFollower.style.left = followerX + 'px';
+        mouseFollower.style.top = followerY + 'px';
+        requestAnimationFrame(animateFollower);
+    }
+    animateFollower();
+    
+    // Ripple Effect on Click
+    function createRipple(e) {
+        const ripple = document.createElement('div');
+        ripple.className = 'ripple-effect';
+        const rect = e.currentTarget.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        ripple.style.left = x + 'px';
+        ripple.style.top = y + 'px';
+        e.currentTarget.appendChild(ripple);
+        setTimeout(() => ripple.remove(), 600);
+    }
+    
+    // Add ripple to all buttons and cards
+    document.querySelectorAll('button, .btn, .pricing-card, .work, .tech-item, .achievement-card').forEach(el => {
+        el.style.position = 'relative';
+        el.style.overflow = 'hidden';
+        el.addEventListener('click', createRipple);
+    });
+    
+    // Text Reveal Animation on Scroll
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const textRevealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('text-revealed');
+            }
+        });
+    }, observerOptions);
+    
+    document.querySelectorAll('h1, h2, h3, .sub-title').forEach(el => {
+        el.classList.add('text-reveal');
+        textRevealObserver.observe(el);
+    });
+    
+    // 3D Tilt Effect on Cards
+    document.querySelectorAll('.pricing-card, .work, .tech-item, .achievement-card, .services-list > div').forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            const rotateX = (y - centerY) / 10;
+            const rotateY = (centerX - x) / 10;
+            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(10px)`;
+        });
+        
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateZ(0)';
+        });
+    });
+    
+    // Glitch Effect on Hover for Titles
+    document.querySelectorAll('.sub-title, .neon-text').forEach(title => {
+        title.addEventListener('mouseenter', function() {
+            this.classList.add('glitch-hover');
+            setTimeout(() => this.classList.remove('glitch-hover'), 500);
+        });
+    });
+    
+    // Floating Particles
+    function createFloatingParticle() {
+        const particle = document.createElement('div');
+        particle.className = 'floating-particle';
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.animationDuration = (3 + Math.random() * 4) + 's';
+        particle.style.opacity = Math.random() * 0.5 + 0.2;
+        document.querySelector('.floating-particles').appendChild(particle);
+        
+        setTimeout(() => particle.remove(), 7000);
+    }
+    
+    // Create floating particles periodically
+    setInterval(createFloatingParticle, 2000);
+    
+    // Interactive Grid Background
+    const grid = document.querySelector('.interactive-grid');
+    for (let i = 0; i < 50; i++) {
+        const dot = document.createElement('div');
+        dot.className = 'grid-dot';
+        dot.style.left = Math.random() * 100 + '%';
+        dot.style.top = Math.random() * 100 + '%';
+        dot.style.animationDelay = Math.random() * 2 + 's';
+        grid.appendChild(dot);
+    }
+    
+    // Magnetic Buttons (buttons follow cursor slightly)
+    document.querySelectorAll('.btn, .pricing-btn, button').forEach(btn => {
+        btn.addEventListener('mousemove', (e) => {
+            const rect = btn.getBoundingClientRect();
+            const x = e.clientX - rect.left - rect.width / 2;
+            const y = e.clientY - rect.top - rect.height / 2;
+            btn.style.transform = `translate(${x * 0.1}px, ${y * 0.1}px)`;
+        });
+        
+        btn.addEventListener('mouseleave', () => {
+            btn.style.transform = 'translate(0, 0)';
+        });
+    });
+    
+    // Typing Indicator for Terminal
+    const terminalInputField = document.getElementById('terminal-input');
+    if (terminalInputField) {
+        terminalInputField.addEventListener('focus', () => {
+            const follower = document.querySelector('.mouse-follower');
+            if (follower) follower.style.transform = 'scale(1.5)';
+        });
+        terminalInputField.addEventListener('blur', () => {
+            const follower = document.querySelector('.mouse-follower');
+            if (follower) follower.style.transform = 'scale(1)';
+        });
+    }
+    
+    // Scroll Progress Indicator
+    const progressBar = document.createElement('div');
+    progressBar.className = 'scroll-progress';
+    document.body.appendChild(progressBar);
+    
+    window.addEventListener('scroll', () => {
+        const scrollTop = window.pageYOffset;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const scrollPercent = (scrollTop / docHeight) * 100;
+        progressBar.style.width = scrollPercent + '%';
+    });
+    
+    // Shake Effect on Error
+    function shakeElement(element) {
+        element.style.animation = 'shake 0.5s';
+        setTimeout(() => {
+            element.style.animation = '';
+        }, 500);
+    }
+    
+    // Add shake to form on validation error
+    const contactFormElement = document.getElementById('contact-form');
+    if (contactFormElement) {
+        contactFormElement.addEventListener('invalid', (e) => {
+            shakeElement(e.target);
+        }, true);
+    }
+    
+    // Color Change on Scroll
+    let scrollCount = 0;
+    window.addEventListener('scroll', () => {
+        scrollCount++;
+        if (scrollCount % 50 === 0) {
+            document.documentElement.style.setProperty('--primary-color', 
+                `hsl(${(scrollCount / 10) % 360}, 100%, 50%)`);
+        }
+    });
+    
+    // Interactive Logo
+    const logo = document.querySelector('.logo');
+    if (logo) {
+        logo.addEventListener('mouseenter', function() {
+            this.style.animation = 'logo-spin 1s ease-in-out';
+        });
+        logo.addEventListener('animationend', function() {
+            this.style.animation = '';
+        });
+    }
+    
+    // Text Scramble Effect
+    function scrambleText(element) {
+        const originalText = element.textContent;
+        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*';
+        let iterations = 0;
+        const interval = setInterval(() => {
+            element.textContent = originalText.split('').map((char, index) => {
+                if (index < iterations) {
+                    return originalText[index];
+                }
+                return chars[Math.floor(Math.random() * chars.length)];
+            }).join('');
+            
+            if (iterations >= originalText.length) {
+                clearInterval(interval);
+                element.textContent = originalText;
+            }
+            iterations += 1/3;
+        }, 30);
+    }
+    
+    // Add scramble effect to headings on hover
+    document.querySelectorAll('.sub-title').forEach(title => {
+        title.addEventListener('mouseenter', function() {
+            if (!this.classList.contains('scrambling')) {
+                this.classList.add('scrambling');
+                scrambleText(this);
+                setTimeout(() => this.classList.remove('scrambling'), 1000);
+            }
+        });
+    });
+</script>
+
+<!-- Live Coding Challenge Script -->
+<script>
+    let challengeStartTime = null;
+    let challengeTimer = null;
+    
+    function runChallenge() {
+        const code = document.getElementById('code-editor').value;
+        const output = document.getElementById('challenge-output');
+        output.innerHTML = '';
+        
+        if (!challengeStartTime) {
+            challengeStartTime = Date.now();
+            startTimer();
+        }
+        
+        try {
+            // Create a safe execution context
+            const fizzBuzz = new Function(code + '\nreturn fizzBuzz();');
+            const result = fizzBuzz();
+            
+            // Validate the result
+            if (Array.isArray(result) && result.length === 100) {
+                let correct = 0;
+                for (let i = 0; i < 100; i++) {
+                    const expected = getFizzBuzzValue(i + 1);
+                    if (result[i] === expected) correct++;
+                }
+                
+                const score = Math.round((correct / 100) * 100);
+                document.getElementById('challenge-score').textContent = `Score: ${score}%`;
+                
+                output.innerHTML = `<p class="output-success">✓ Test passed! Score: ${score}%</p>`;
+                output.innerHTML += `<pre>${result.slice(0, 20).join(', ')}...</pre>`;
+                
+                if (score === 100) {
+                    output.innerHTML += '<p class="output-success">🎉 Perfect! Challenge completed!</p>';
+                    stopTimer();
+                }
+            } else {
+                output.innerHTML = '<p class="output-error">✗ Function should return an array of 100 elements</p>';
+            }
+        } catch (error) {
+            output.innerHTML = `<p class="output-error">✗ Error: ${error.message}</p>`;
+        }
+    }
+    
+    function getFizzBuzzValue(n) {
+        if (n % 15 === 0) return 'FizzBuzz';
+        if (n % 3 === 0) return 'Fizz';
+        if (n % 5 === 0) return 'Buzz';
+        return n;
+    }
+    
+    function startTimer() {
+        challengeTimer = setInterval(() => {
+            const elapsed = Math.floor((Date.now() - challengeStartTime) / 1000);
+            document.getElementById('challenge-time').textContent = `Time: ${elapsed}s`;
+        }, 1000);
+    }
+    
+    function stopTimer() {
+        if (challengeTimer) {
+            clearInterval(challengeTimer);
+            challengeTimer = null;
+        }
+    }
+    
+    function resetChallenge() {
+        document.getElementById('code-editor').value = '';
+        document.getElementById('challenge-output').innerHTML = '<p class="output-placeholder">Run your code to see the output here...</p>';
+        document.getElementById('challenge-score').textContent = 'Score: 0';
+        document.getElementById('challenge-time').textContent = 'Time: 0s';
+        challengeStartTime = null;
+        stopTimer();
+    }
+</script>
+
+<!-- Voice Commands Script -->
+<script>
+    let recognition = null;
+    let isListening = false;
+    
+    if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        recognition = new SpeechRecognition();
+        recognition.continuous = false;
+        recognition.interimResults = false;
+        recognition.lang = 'en-US';
+        
+        recognition.onresult = function(event) {
+            const command = event.results[0][0].transcript.toLowerCase();
+            handleVoiceCommand(command);
+        };
+        
+        recognition.onend = function() {
+            isListening = false;
+            document.getElementById('voice-indicator').classList.add('voice-hidden');
+        };
+        
+        recognition.onerror = function(event) {
+            console.error('Speech recognition error:', event.error);
+            isListening = false;
+            document.getElementById('voice-indicator').classList.add('voice-hidden');
+        };
+    }
+    
+    // Make toggleVoiceCommands globally accessible
+    window.toggleVoiceCommands = function() {
+        if (!recognition) {
+            alert('Voice commands are not supported in your browser. Please use Chrome or Edge.');
+            return;
+        }
+        
+        if (isListening) {
+            recognition.stop();
+            isListening = false;
+            const indicator = document.getElementById('voice-indicator');
+            if (indicator) indicator.classList.add('voice-hidden');
+        } else {
+            recognition.start();
+            isListening = true;
+            const indicator = document.getElementById('voice-indicator');
+            if (indicator) indicator.classList.remove('voice-hidden');
+        }
+    };
+    
+    function handleVoiceCommand(command) {
+        console.log('Voice command:', command);
+        
+        if (command.includes('home') || command.includes('go home')) {
+            window.location.hash = '#header';
+        } else if (command.includes('about')) {
+            window.location.hash = '#about';
+        } else if (command.includes('services')) {
+            window.location.hash = '#services';
+        } else if (command.includes('portfolio') || command.includes('work')) {
+            window.location.hash = '#portfolio';
+        } else if (command.includes('contact')) {
+            window.location.hash = '#contact';
+        } else if (command.includes('terminal') || command.includes('open terminal')) {
+            if (typeof window.toggleTerminal === 'function') {
+                window.toggleTerminal();
+            }
+        } else if (command.includes('theme') || command.includes('change theme')) {
+            if (typeof window.toggleTheme === 'function') {
+                window.toggleTheme();
+            }
+        } else if (command.includes('chat') || command.includes('open chat')) {
+            if (typeof toggleChat === 'function') {
+                toggleChat();
+            }
+        } else if (command.includes('analytics') || command.includes('stats')) {
+            if (typeof window.toggleAnalytics === 'function') {
+                window.toggleAnalytics();
+            }
+        } else if (command.includes('challenge') || command.includes('coding challenge')) {
+            document.getElementById('coding-challenge').scrollIntoView({ behavior: 'smooth' });
+        } else {
+            alert(`Command "${command}" not recognized. Try: home, about, services, portfolio, contact, terminal, theme, chat, analytics, or challenge`);
+        }
+    }
+    
+    // Keyboard shortcut for voice commands
+    document.addEventListener('keydown', (e) => {
+        if ((e.key === 'v' || e.key === 'V') && !e.target.matches('input, textarea')) {
+            e.preventDefault();
+            if (typeof window.toggleVoiceCommands === 'function') {
+                window.toggleVoiceCommands();
+            }
+        }
+    });
+</script>
+
+<!-- Live Chat Script -->
+<script>
+    let chatOpen = false;
+    const chatMessages = [
+        { text: "Hi! I'm Preston. How can I help you today?", bot: true, time: "Just now" }
+    ];
+    
+    // Make toggleChat globally accessible
+    window.toggleChat = function() {
+        chatOpen = !chatOpen;
+        const chat = document.getElementById('live-chat');
+        if (!chat) return;
+        const toggle = chat.querySelector('.chat-toggle i');
+        
+        if (chatOpen) {
+            chat.classList.remove('chat-closed');
+            if (toggle) {
+                toggle.classList.remove('fa-chevron-down');
+                toggle.classList.add('fa-chevron-up');
+            }
+            const badge = document.getElementById('chat-badge');
+            if (badge) badge.style.display = 'none';
+        } else {
+            chat.classList.add('chat-closed');
+            if (toggle) {
+                toggle.classList.remove('fa-chevron-up');
+                toggle.classList.add('fa-chevron-down');
+            }
+        }
+    };
+    
+    function sendChatMessage() {
+        const input = document.getElementById('chat-input');
+        const message = input.value.trim();
+        
+        if (message) {
+            addChatMessage(message, false);
+            input.value = '';
+            
+            // Simulate bot response
+            setTimeout(() => {
+                const responses = [
+                    "That's great! Let me help you with that.",
+                    "I'd be happy to assist you with that.",
+                    "Thanks for your interest! I'll get back to you soon.",
+                    "Feel free to contact me via email or WhatsApp for more details."
+                ];
+                const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+                addChatMessage(randomResponse, true);
+            }, 1000);
+        }
+    }
+    
+    function sendQuickReply(text) {
+        document.getElementById('chat-input').value = text;
+        sendChatMessage();
+    }
+    
+    function addChatMessage(text, isBot) {
+        const messagesContainer = document.getElementById('chat-messages');
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `chat-message ${isBot ? 'bot' : 'user'}`;
+        
+        const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        
+        messageDiv.innerHTML = `
+            ${isBot ? '<div class="message-avatar">P</div>' : ''}
+            <div class="message-content">
+                <p>${text}</p>
+                <span class="message-time">${time}</span>
+            </div>
+            ${!isBot ? '<div class="message-avatar user-avatar">You</div>' : ''}
+        `;
+        
+        messagesContainer.appendChild(messageDiv);
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    }
+    
+    // Enter key to send message
+    document.getElementById('chat-input').addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            sendChatMessage();
+        }
+    });
+</script>
+
+<!-- Typing Speed Game Script -->
+<script>
+    const gameText = `Preston Mugo is the sexiest guy I have ever met`;
+    
+    let currentText = '';
+    let gameStarted = false;
+    let gameTimer = null;
+    let startTime = 0;
+    let typedChars = 0;
+    let errors = 0;
+    
+    function loadNewText() {
+        currentText = gameText;
+        displayText();
+        resetGameStats();
+    }
+    
+    function displayText() {
+        const typedTextEl = document.getElementById('typed-text');
+        const currentCharEl = document.getElementById('current-char');
+        const remainingTextEl = document.getElementById('remaining-text');
+        
+        if (!currentText) {
+            typedTextEl.textContent = '';
+            currentCharEl.textContent = '';
+            remainingTextEl.textContent = '';
+            return;
+        }
+        
+        const input = document.getElementById('game-input').value;
+        const correctChars = getCorrectChars(input, currentText);
+        
+        typedTextEl.textContent = currentText.substring(0, correctChars);
+        currentCharEl.textContent = currentText[correctChars] || '';
+        remainingTextEl.textContent = currentText.substring(correctChars + 1);
+        
+        // Highlight current character
+        if (input.length > correctChars) {
+            currentCharEl.className = 'current-char error';
+        } else {
+            currentCharEl.className = 'current-char';
+        }
+    }
+    
+    function getCorrectChars(input, target) {
+        let correct = 0;
+        for (let i = 0; i < Math.min(input.length, target.length); i++) {
+            if (input[i] === target[i]) {
+                correct++;
+            } else {
+                break;
+            }
+        }
+        return correct;
+    }
+    
+    function startTypingGame() {
+        if (!currentText) {
+            loadNewText();
+        }
+        
+        gameStarted = true;
+        startTime = Date.now();
+        typedChars = 0;
+        errors = 0;
+        
+        document.getElementById('game-input').value = '';
+        document.getElementById('game-input').focus();
+        document.getElementById('start-game-btn').style.display = 'none';
+        document.getElementById('reset-game-btn').classList.add('show');
+        document.getElementById('new-text-btn').classList.add('show');
+        document.getElementById('game-result').classList.remove('show');
+        
+        gameTimer = setInterval(updateGameStats, 100);
+        displayText();
+    }
+    
+    function resetTypingGame() {
+        gameStarted = false;
+        if (gameTimer) {
+            clearInterval(gameTimer);
+            gameTimer = null;
+        }
+        
+        document.getElementById('game-input').value = '';
+        document.getElementById('start-game-btn').style.display = 'inline-block';
+        document.getElementById('reset-game-btn').classList.remove('show');
+        document.getElementById('new-text-btn').classList.remove('show');
+        
+        resetGameStats();
+        displayText();
+    }
+    
+    function resetGameStats() {
+        typedChars = 0;
+        errors = 0;
+        startTime = Date.now();
+        updateGameStats();
+    }
+    
+    function updateGameStats() {
+        if (!gameStarted) {
+            document.getElementById('wpm-display').textContent = '0';
+            document.getElementById('accuracy-display').textContent = '100%';
+            document.getElementById('time-display').textContent = '0s';
+            return;
+        }
+        
+        const input = document.getElementById('game-input').value;
+        const elapsed = (Date.now() - startTime) / 1000; // seconds
+        const correctChars = getCorrectChars(input, currentText);
+        const totalChars = input.length;
+        
+        typedChars = correctChars;
+        errors = totalChars - correctChars;
+        
+        // Calculate WPM (words per minute) - assuming 5 characters per word
+        const words = correctChars / 5;
+        const minutes = elapsed / 60;
+        const wpm = minutes > 0 ? Math.round(words / minutes) : 0;
+        
+        // Calculate accuracy
+        const accuracy = totalChars > 0 ? Math.round((correctChars / totalChars) * 100) : 100;
+        
+        document.getElementById('wpm-display').textContent = wpm;
+        document.getElementById('accuracy-display').textContent = accuracy + '%';
+        document.getElementById('time-display').textContent = Math.round(elapsed) + 's';
+        
+        // Check if game is complete
+        if (input === currentText) {
+            endGame(wpm, accuracy, elapsed);
+        }
+    }
+    
+    function endGame(wpm, accuracy, time) {
+        gameStarted = false;
+        if (gameTimer) {
+            clearInterval(gameTimer);
+            gameTimer = null;
+        }
+        
+        document.getElementById('final-wpm').textContent = wpm;
+        document.getElementById('final-accuracy').textContent = accuracy + '%';
+        document.getElementById('final-time').textContent = Math.round(time) + 's';
+        document.getElementById('game-result').classList.add('show');
+        
+        // Confetti effect
+        createConfetti();
+    }
+    
+    function createConfetti() {
+        for (let i = 0; i < 50; i++) {
+            setTimeout(() => {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti-particle';
+                confetti.style.left = Math.random() * 100 + '%';
+                confetti.style.backgroundColor = ['#00ff41', '#00ffff', '#ff6b00'][Math.floor(Math.random() * 3)];
+                confetti.style.animationDelay = Math.random() * 0.5 + 's';
+                document.querySelector('.game-container').appendChild(confetti);
+                
+                setTimeout(() => confetti.remove(), 2000);
+            }, i * 20);
+        }
+    }
+    
+    // Initialize game
+    document.addEventListener('DOMContentLoaded', () => {
+        const gameInput = document.getElementById('game-input');
+        if (gameInput) {
+            gameInput.addEventListener('input', () => {
+                if (!gameStarted && gameInput.value.length > 0) {
+                    startTypingGame();
+                }
+                displayText();
+                if (gameStarted) {
+                    updateGameStats();
+                }
+            });
+            
+            loadNewText();
+        }
+    });
+</script>
+
+<!-- Analytics Dashboard Script -->
+<script>
+    // Get today's date as a string (YYYY-MM-DD)
+    function getTodayDate() {
+        const today = new Date();
+        return today.toISOString().split('T')[0]; // Returns YYYY-MM-DD
+    }
+    
+    // Check if it's a new day and reset if needed (make it globally accessible)
+    window.checkAndResetDailyStats = function() {
+        const today = getTodayDate();
+        const lastDate = localStorage.getItem('lastAnalyticsDate');
+        
+        if (lastDate !== today) {
+            // It's a new day, reset daily stats
+            localStorage.setItem('dailyVisitors', '0');
+            localStorage.setItem('dailyPageViews', '0');
+            localStorage.setItem('lastAnalyticsDate', today);
+            console.log('New day detected! Daily stats reset.');
+        }
+    };
+    
+    // Initialize and check for new day
+    checkAndResetDailyStats();
+    
+    // Get or initialize daily stats
+    const today = getTodayDate();
+    let analyticsData = {
+        dailyVisitors: parseInt(localStorage.getItem('dailyVisitors')) || 0,
+        dailyPageViews: parseInt(localStorage.getItem('dailyPageViews')) || 0,
+        clicks: parseInt(localStorage.getItem('clicks')) || 0,
+        sections: JSON.parse(localStorage.getItem('sections')) || {},
+        activities: JSON.parse(localStorage.getItem('activities')) || [],
+        startTime: Date.now(),
+        lastDate: localStorage.getItem('lastAnalyticsDate') || today
+    };
+    
+    // Track unique visitor for today (using sessionStorage to avoid counting same user multiple times per day)
+    const visitorKey = `visitor_${today}`;
+    const hasVisitedToday = sessionStorage.getItem(visitorKey);
+    
+    if (!hasVisitedToday) {
+        // New visitor for today
+        analyticsData.dailyVisitors++;
+        sessionStorage.setItem(visitorKey, 'true');
+        localStorage.setItem('dailyVisitors', analyticsData.dailyVisitors);
+    }
+    
+    // Track page view for today
+    analyticsData.dailyPageViews++;
+    localStorage.setItem('dailyPageViews', analyticsData.dailyPageViews);
+    
+    // Track clicks
+    document.addEventListener('click', (e) => {
+        analyticsData.clicks++;
+        localStorage.setItem('clicks', analyticsData.clicks);
+        
+        // Track section visits
+        const section = e.target.closest('section, [id]');
+        if (section && section.id) {
+            analyticsData.sections[section.id] = (analyticsData.sections[section.id] || 0) + 1;
+            localStorage.setItem('sections', JSON.stringify(analyticsData.sections));
+        }
+        
+        // Add activity
+        const activity = {
+            action: e.target.tagName + ' clicked',
+            time: new Date().toLocaleTimeString(),
+            section: section ? section.id : 'unknown'
+        };
+        analyticsData.activities.unshift(activity);
+        if (analyticsData.activities.length > 10) analyticsData.activities.pop();
+        localStorage.setItem('activities', JSON.stringify(analyticsData.activities));
+        
+        updateAnalytics();
+    });
+    
+    // Make toggleAnalytics globally accessible
+    window.toggleAnalytics = function() {
+        const dashboard = document.getElementById('analytics-dashboard');
+        if (!dashboard) return;
+        dashboard.classList.toggle('analytics-hidden');
+        if (!dashboard.classList.contains('analytics-hidden')) {
+            updateAnalytics();
+        }
+    };
+    
+    function updateAnalytics() {
+        // Check if it's a new day before updating
+        window.checkAndResetDailyStats();
+        
+        // Reload daily stats in case they were reset
+        const today = getTodayDate();
+        analyticsData.dailyVisitors = parseInt(localStorage.getItem('dailyVisitors')) || 0;
+        analyticsData.dailyPageViews = parseInt(localStorage.getItem('dailyPageViews')) || 0;
+        
+        document.getElementById('total-visitors').textContent = analyticsData.dailyVisitors;
+        document.getElementById('page-views').textContent = analyticsData.dailyPageViews;
+        document.getElementById('clicks').textContent = analyticsData.clicks;
+        
+        const avgTime = Math.floor((Date.now() - analyticsData.startTime) / 60000);
+        document.getElementById('avg-time').textContent = avgTime + 'm';
+        
+        // Popular sections
+        const sectionsList = document.getElementById('popular-sections');
+        sectionsList.innerHTML = '';
+        const sortedSections = Object.entries(analyticsData.sections)
+            .sort((a, b) => b[1] - a[1])
+            .slice(0, 5);
+        
+        sortedSections.forEach(([section, count]) => {
+            const item = document.createElement('div');
+            item.className = 'popular-item';
+            item.innerHTML = `<span>${section}</span><span>${count} views</span>`;
+            sectionsList.appendChild(item);
+        });
+        
+        // Recent activity
+        const activityList = document.getElementById('recent-activity');
+        activityList.innerHTML = '';
+        analyticsData.activities.slice(0, 5).forEach(activity => {
+            const item = document.createElement('div');
+            item.className = 'activity-item';
+            item.innerHTML = `<span>${activity.action}</span><span>${activity.time}</span>`;
+            activityList.appendChild(item);
+        });
+    }
+    
+    // Update analytics every 5 seconds
+    setInterval(updateAnalytics, 5000);
+</script>
+
+
+<!-- Social Proof Script -->
+<script>
+    function updateSocialProof() {
+        // Check if it's a new day before updating
+        if (typeof window.checkAndResetDailyStats === 'function') {
+            window.checkAndResetDailyStats();
+        }
+        
+        // Get accurate daily views
+        const dailyViews = parseInt(localStorage.getItem('dailyPageViews')) || 0;
+        
+        // Live visitors (simulated, but based on actual activity)
+        const liveVisitors = Math.floor(Math.random() * 10) + 1;
+        document.getElementById('live-visitors').textContent = liveVisitors;
+        
+        // Last activity
+        const activities = ['2 min ago', '5 min ago', 'Just now', '1 min ago'];
+        const randomActivity = activities[Math.floor(Math.random() * activities.length)];
+        document.getElementById('last-activity').textContent = randomActivity;
+        
+        // Daily views (accurate count for today)
+        document.getElementById('total-views').textContent = dailyViews.toLocaleString();
+    }
+    
+    updateSocialProof();
+    setInterval(updateSocialProof, 30000); // Update every 30 seconds
+    
+    // Check for new day every minute
+    setInterval(() => {
+        if (typeof window.checkAndResetDailyStats === 'function') {
+            window.checkAndResetDailyStats();
+        }
+    }, 60000);
+</script>
+
+<!-- Christmas Game Script -->
+<script>
+    const christmasIcons = ['🎄', '🎁', '🎅', '❄️', '⭐', '🔔', '🦌', '🕯️'];
+    let gameCards = [];
+    let flippedCards = [];
+    let matchedPairs = 0;
+    let moves = 0;
+    let christmasGameStarted = false;
+    let canFlip = true;
+    
+    function createGameCards() {
+        const gameGrid = document.getElementById('memory-game');
+        if (!gameGrid) return;
+        
+        gameGrid.innerHTML = '';
+        
+        // Create pairs of cards
+        const cardPairs = [...christmasIcons, ...christmasIcons];
+        // Shuffle cards
+        for (let i = cardPairs.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [cardPairs[i], cardPairs[j]] = [cardPairs[j], cardPairs[i]];
+        }
+        
+        gameCards = cardPairs.map((icon, index) => ({
+            id: index,
+            icon: icon,
+            flipped: false,
+            matched: false
+        }));
+        
+        gameCards.forEach((card, index) => {
+            const cardElement = document.createElement('div');
+            cardElement.className = 'memory-card';
+            cardElement.dataset.index = index;
+            cardElement.innerHTML = '<div class="card-front">?</div><div class="card-back">' + card.icon + '</div>';
+            cardElement.addEventListener('click', () => flipCard(index));
+            gameGrid.appendChild(cardElement);
+        });
+    }
+    
+    function startChristmasGame() {
+        christmasGameStarted = true;
+        matchedPairs = 0;
+        moves = 0;
+        flippedCards = [];
+        canFlip = true;
+        
+        createGameCards();
+        updateGameStats();
+        
+        const startBtn = document.getElementById('start-christmas-game');
+        const resetBtn = document.getElementById('reset-christmas-game');
+        if (startBtn) startBtn.style.display = 'none';
+        if (resetBtn) {
+            resetBtn.style.display = 'inline-block';
+            resetBtn.classList.add('show');
+        }
+        const status = document.getElementById('game-status');
+        if (status) status.textContent = 'Find all pairs!';
+    }
+    
+    function resetChristmasGame() {
+        christmasGameStarted = false;
+        matchedPairs = 0;
+        moves = 0;
+        flippedCards = [];
+        canFlip = true;
+        
+        createGameCards();
+        updateGameStats();
+        
+        const startBtn = document.getElementById('start-christmas-game');
+        const resetBtn = document.getElementById('reset-christmas-game');
+        if (startBtn) startBtn.style.display = 'inline-block';
+        if (resetBtn) {
+            resetBtn.style.display = 'none';
+            resetBtn.classList.remove('show');
+        }
+        const status = document.getElementById('game-status');
+        if (status) status.textContent = 'Find all pairs!';
+    }
+    
+    function flipCard(index) {
+        if (!christmasGameStarted || !canFlip) return;
+        
+        const card = gameCards[index];
+        const cardElement = document.querySelector(`[data-index="${index}"]`);
+        
+        if (!card || card.flipped || card.matched || flippedCards.length >= 2) return;
+        
+        card.flipped = true;
+        if (cardElement) cardElement.classList.add('flipped');
+        flippedCards.push({ index, card });
+        
+        if (flippedCards.length === 2) {
+            canFlip = false;
+            moves++;
+            updateGameStats();
+            
+            setTimeout(() => {
+                checkMatch();
+            }, 1000);
+        }
+    }
+    
+    function checkMatch() {
+        const [first, second] = flippedCards;
+        
+        if (first.card.icon === second.card.icon) {
+            // Match found!
+            gameCards[first.index].matched = true;
+            gameCards[second.index].matched = true;
+            matchedPairs++;
+            
+            const firstEl = document.querySelector(`[data-index="${first.index}"]`);
+            const secondEl = document.querySelector(`[data-index="${second.index}"]`);
+            if (firstEl) firstEl.classList.add('matched');
+            if (secondEl) secondEl.classList.add('matched');
+            
+            // Create confetti effect
+            if (typeof createConfetti === 'function') {
+                createConfetti(window.innerWidth / 2, window.innerHeight / 2);
+            }
+            
+            if (matchedPairs === 8) {
+                // Game won!
+                setTimeout(() => {
+                    showRewardModal();
+                }, 500);
+            }
+        } else {
+            // No match, flip back
+            gameCards[first.index].flipped = false;
+            gameCards[second.index].flipped = false;
+            const firstEl = document.querySelector(`[data-index="${first.index}"]`);
+            const secondEl = document.querySelector(`[data-index="${second.index}"]`);
+            if (firstEl) firstEl.classList.remove('flipped');
+            if (secondEl) secondEl.classList.remove('flipped');
+        }
+        
+        flippedCards = [];
+        canFlip = true;
+        updateGameStats();
+    }
+    
+    function updateGameStats() {
+        const movesEl = document.getElementById('game-moves');
+        const matchesEl = document.getElementById('game-matches');
+        const statusEl = document.getElementById('game-status');
+        
+        if (movesEl) movesEl.textContent = moves;
+        if (matchesEl) matchesEl.textContent = matchedPairs;
+        
+        if (matchedPairs === 8 && statusEl) {
+            statusEl.textContent = '🎉 You Won!';
+        } else if (statusEl) {
+            statusEl.textContent = 'Find all pairs!';
+        }
+    }
+    
+    function showRewardModal() {
+        // Generate random discount (15%, 20%, or 25%)
+        const discounts = [15, 20, 25];
+        const discount = discounts[Math.floor(Math.random() * discounts.length)];
+        const code = `XMAS${discount}${Math.floor(Math.random() * 1000)}`;
+        
+        const codeEl = document.getElementById('discount-code');
+        const percentEl = document.getElementById('discount-percent');
+        const modal = document.getElementById('christmas-reward-modal');
+        
+        if (codeEl) codeEl.textContent = code;
+        if (percentEl) percentEl.textContent = discount + '%';
+        if (modal) modal.classList.add('show');
+        
+        // Store discount code in localStorage
+        localStorage.setItem('christmasDiscountCode', code);
+        localStorage.setItem('christmasDiscountPercent', discount);
+    }
+    
+    function closeRewardModal() {
+        const modal = document.getElementById('christmas-reward-modal');
+        if (modal) modal.classList.remove('show');
+    }
+    
+    function copyDiscountCode() {
+        const codeEl = document.getElementById('discount-code');
+        if (!codeEl) return;
+        
+        const code = codeEl.textContent;
+        navigator.clipboard.writeText(code).then(() => {
+            const btn = document.querySelector('.copy-code-btn');
+            if (btn) {
+                const originalText = btn.innerHTML;
+                btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                btn.style.background = 'var(--primary-color)';
+                setTimeout(() => {
+                    btn.innerHTML = originalText;
+                    btn.style.background = '';
+                }, 2000);
+            }
+        });
+    }
+    
+    function goToPricing() {
+        closeRewardModal();
+        const pricingSection = document.getElementById('pricing');
+        if (pricingSection) {
+            pricingSection.scrollIntoView({ behavior: 'smooth' });
+        }
+    }
+    
+    // Initialize game on page load
+    document.addEventListener('DOMContentLoaded', () => {
+        createGameCards();
+    });
+</script>
+
+<!-- Christmas Snow Effect -->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const snowCanvas = document.getElementById('snow-canvas');
+        if (snowCanvas) {
+            const ctx = snowCanvas.getContext('2d');
+            snowCanvas.width = window.innerWidth;
+            snowCanvas.height = window.innerHeight;
+            snowCanvas.style.position = 'fixed';
+            snowCanvas.style.top = '0';
+            snowCanvas.style.left = '0';
+            snowCanvas.style.pointerEvents = 'none';
+            snowCanvas.style.zIndex = '1';
+            
+            const snowflakes = [];
+            const maxFlakes = 100;
+            
+            class Snowflake {
+                constructor() {
+                    this.x = Math.random() * snowCanvas.width;
+                    this.y = Math.random() * snowCanvas.height;
+                    this.size = Math.random() * 3 + 1;
+                    this.speed = Math.random() * 2 + 0.5;
+                    this.opacity = Math.random() * 0.5 + 0.3;
+                }
+                
+                update() {
+                    this.y += this.speed;
+                    this.x += Math.sin(this.y * 0.01) * 0.5;
+                    
+                    if (this.y > snowCanvas.height) {
+                        this.y = 0;
+                        this.x = Math.random() * snowCanvas.width;
+                    }
+                }
+                
+                draw() {
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity})`;
+                    ctx.fill();
+                }
+            }
+            
+            for (let i = 0; i < maxFlakes; i++) {
+                snowflakes.push(new Snowflake());
+            }
+            
+            function animateSnow() {
+                ctx.clearRect(0, 0, snowCanvas.width, snowCanvas.height);
+                
+                snowflakes.forEach(flake => {
+                    flake.update();
+                    flake.draw();
+                });
+                
+                requestAnimationFrame(animateSnow);
+            }
+            
+            animateSnow();
+            
+            window.addEventListener('resize', () => {
+                snowCanvas.width = window.innerWidth;
+                snowCanvas.height = window.innerHeight;
+            });
+        }
+    });
+</script>
+
+<!-- Easter Egg: Konami Code -->
+<script>
+    let konamiCode = [];
+    const konamiSequence = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+    
+    document.addEventListener('keydown', (e) => {
+        konamiCode.push(e.key);
+        if (konamiCode.length > konamiSequence.length) {
+            konamiCode.shift();
+        }
+        
+        if (konamiCode.join(',') === konamiSequence.join(',')) {
+            // Easter egg activated!
+            document.body.style.animation = 'rainbow 2s infinite';
+            createConfetti(window.innerWidth / 2, window.innerHeight / 2);
+            setTimeout(() => {
+                alert('🎉 Easter Egg Found! You\'re a true tech enthusiast!');
+            }, 500);
+            konamiCode = [];
+        }
+    });
+  </script>
 </body>
 </html>
