@@ -76,6 +76,10 @@
                     <span class="button-label">Stats</span>
                 </button>
             </div>
+            <!-- Mobile-only Preston AI button -->
+            <button class="preston-ai-toggle-mobile" onclick="activatePrestonAI()" aria-label="Talk to Preston AI" title="Say 'Hey Preston' to talk to AI">
+                <i class="fas fa-microphone"></i>
+            </button>
             <i class="fas fa-bars" onclick="openmenu()"></i>
         </nav>
         <div class="header-text">
@@ -1119,7 +1123,7 @@ console.log(fizzBuzz());"></textarea>
             <div class="chat-message bot">
                 <div class="message-avatar">P</div>
                 <div class="message-content">
-                    <p>Hi! I'm Preston. How can I help you today?</p>
+                    <p>Hello! 👋 I'm Preston AI, your virtual assistant. I'm here to help you learn about Preston Mwendwa and this portfolio. Feel free to ask me anything about services, pricing, projects, or my background. How can I assist you today?</p>
                     <span class="message-time">Just now</span>
                 </div>
             </div>
@@ -1239,10 +1243,57 @@ console.log(fizzBuzz());"></textarea>
     var sidemeu = document.getElementById("sidemenu");
 
     function openmenu(){
-        sidemeu.style.right = "0";
+        if (sidemeu) {
+            sidemeu.style.right = "0";
+            sidemeu.style.display = "block";
+            sidemeu.style.visibility = "visible";
+            sidemeu.style.opacity = "1";
+            // Prevent body scroll when menu is open
+            document.body.style.overflow = "hidden";
+            console.log("Menu opened");
+        }
     }
     function closemenu(){
-        sidemeu.style.right = "-200px";
+        if (sidemeu) {
+            sidemeu.style.right = "-200px";
+            // Restore body scroll
+            document.body.style.overflow = "";
+            console.log("Menu closed");
+        }
+    }
+    
+    // Make functions globally accessible
+    window.openmenu = openmenu;
+    window.closemenu = closemenu;
+    
+    // Close menu when clicking outside or on a link
+    document.addEventListener('click', function(event) {
+        if (sidemeu && window.innerWidth <= 600) {
+            const isClickInsideMenu = sidemeu.contains(event.target);
+            const isClickOnToggle = event.target.closest('.fas.fa-bars') || event.target.closest('.preston-ai-toggle-mobile');
+            const isClickOnClose = event.target.closest('.fas.fa-times');
+            
+            if (isClickOnClose) {
+                closemenu();
+                return;
+            }
+            
+            if (!isClickInsideMenu && !isClickOnToggle && sidemeu.style.right === "0px") {
+                closemenu();
+            }
+        }
+    });
+    
+    // Close menu when clicking on a nav link
+    if (sidemeu) {
+        const navLinks = sidemeu.querySelectorAll('a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                if (window.innerWidth <= 600) {
+                    setTimeout(closemenu, 300);
+                }
+            });
+        });
     }
 
 </script>
@@ -2505,12 +2556,108 @@ Passion: Web Development, UI/UX Design, Tech Innovation`,
     });
 </script>
 
-<!-- Live Chat Script -->
+<!-- Live Chat Script - AI Assistant -->
 <script>
     let chatOpen = false;
-    const chatMessages = [
-        { text: "Hi! I'm Preston. How can I help you today?", bot: true, time: "Just now" }
-    ];
+    let isFirstMessage = true;
+    
+    // Preston AI Knowledge Base
+    const prestonKnowledge = {
+        greetings: [
+            "Hello! Great to meet you! 👋",
+            "Hi there! How can I help you today?",
+            "Hey! Welcome to my portfolio. What would you like to know?",
+            "Greetings! I'm Preston AI, here to assist you."
+        ],
+        about: [
+            "I'm Preston Mwendwa, a web developer and creative professional from Kenya. I specialize in creating stunning, responsive websites and web applications. I've worked on over 50 projects and written more than 100,000 lines of code.",
+            "I'm passionate about bringing creative ideas to life through code. My expertise includes front-end development, UI/UX design, and modern web technologies.",
+            "I'm a talented developer from Kenya who loves creating beautiful and functional websites. I work with various technologies to build amazing digital experiences."
+        ],
+        services: [
+            "I offer web development services including portfolio websites, business sites, e-commerce platforms, and custom web solutions. Each project is tailored to meet your specific needs.",
+            "My services include: Portfolio websites, Business websites, E-commerce platforms, Custom web development, UI/UX design, and ongoing support.",
+            "I create responsive, modern websites using the latest technologies. Whether you need a simple portfolio or a complex e-commerce site, I've got you covered!"
+        ],
+        pricing: [
+            "I offer various packages: Portfolio Basic starts at KES 15,000, Portfolio Standard at KES 25,000, and Portfolio Premium at KES 40,000. Business and E-commerce packages are also available. Check the pricing section for details!",
+            "My pricing is competitive and varies based on your needs. Portfolio sites start from KES 15,000, while business and e-commerce solutions have different pricing tiers. There's also a special Christmas discount available!",
+            "I have flexible pricing options to suit different budgets. You can win a 5% discount by playing the Christmas game on this site!"
+        ],
+        portfolio: [
+            "I've worked on over 50 projects, creating everything from personal portfolios to complex e-commerce platforms. Each project showcases my skills in modern web development.",
+            "My portfolio includes various types of websites - portfolios, business sites, and e-commerce platforms. All projects are responsive, modern, and user-friendly.",
+            "I've completed numerous projects, each demonstrating my expertise in web development, design, and user experience. Feel free to explore the portfolio section to see examples!"
+        ],
+        contact: [
+            "You can reach me through the contact form on this site, or via WhatsApp. I'm always happy to discuss your project needs!",
+            "Feel free to use the contact form, WhatsApp button, or email me directly. I typically respond within 24 hours.",
+            "I'm available through multiple channels - the contact form, WhatsApp, or email. Let's discuss how I can help bring your project to life!"
+        ],
+        location: [
+            "I'm based in Kenya, but I work with clients worldwide!",
+            "I'm from Kenya, but I serve clients globally. Distance is no barrier to great web development!",
+            "I'm located in Kenya, but I work with clients from all over the world."
+        ],
+        experience: [
+            "I have extensive experience in web development, with over 50 completed projects and 100,000+ lines of code written. I'm constantly learning and improving my skills.",
+            "I've been developing websites for a while now, working on various projects that have helped me build expertise in modern web technologies and best practices.",
+            "My experience spans multiple projects and technologies. I've worked on everything from simple portfolios to complex web applications."
+        ],
+        default: [
+            "That's an interesting question! Could you tell me more about what you'd like to know?",
+            "I'd love to help with that. Could you be more specific?",
+            "Let me think about that... Could you rephrase your question?",
+            "I'm here to help! Try asking about my services, pricing, portfolio, or background."
+        ]
+    };
+    
+    function getAIResponse(message) {
+        const lowerMessage = message.toLowerCase();
+        
+        // Greetings
+        if (lowerMessage.match(/\b(hi|hello|hey|greetings|good morning|good afternoon|good evening)\b/)) {
+            return prestonKnowledge.greetings[Math.floor(Math.random() * prestonKnowledge.greetings.length)];
+        }
+        
+        // About Preston
+        if (lowerMessage.match(/\b(who are you|about you|tell me about|introduce|yourself)\b/)) {
+            return prestonKnowledge.about[Math.floor(Math.random() * prestonKnowledge.about.length)];
+        }
+        
+        // Services
+        if (lowerMessage.match(/\b(services|what do you do|what can you do|offer|provide)\b/)) {
+            return prestonKnowledge.services[Math.floor(Math.random() * prestonKnowledge.services.length)];
+        }
+        
+        // Pricing
+        if (lowerMessage.match(/\b(price|pricing|cost|how much|fee|charge|discount)\b/)) {
+            return prestonKnowledge.pricing[Math.floor(Math.random() * prestonKnowledge.pricing.length)];
+        }
+        
+        // Portfolio/Projects
+        if (lowerMessage.match(/\b(portfolio|projects|work|examples|show me|what have you done)\b/)) {
+            return prestonKnowledge.portfolio[Math.floor(Math.random() * prestonKnowledge.portfolio.length)];
+        }
+        
+        // Contact
+        if (lowerMessage.match(/\b(contact|reach|email|phone|whatsapp|get in touch|how to contact)\b/)) {
+            return prestonKnowledge.contact[Math.floor(Math.random() * prestonKnowledge.contact.length)];
+        }
+        
+        // Location
+        if (lowerMessage.match(/\b(where|location|from|kenya|based)\b/)) {
+            return prestonKnowledge.location[Math.floor(Math.random() * prestonKnowledge.location.length)];
+        }
+        
+        // Experience
+        if (lowerMessage.match(/\b(experience|years|how long|expertise|skills|proficient)\b/)) {
+            return prestonKnowledge.experience[Math.floor(Math.random() * prestonKnowledge.experience.length)];
+        }
+        
+        // Default response
+        return prestonKnowledge.default[Math.floor(Math.random() * prestonKnowledge.default.length)];
+    }
     
     // Make toggleChat globally accessible
     window.toggleChat = function() {
@@ -2527,6 +2674,11 @@ Passion: Web Development, UI/UX Design, Tech Innovation`,
             }
             const badge = document.getElementById('chat-badge');
             if (badge) badge.style.display = 'none';
+            
+            // Auto-introduce on first open
+            if (isFirstMessage) {
+                isFirstMessage = false;
+            }
         } else {
             chat.classList.add('chat-closed');
             if (toggle) {
@@ -2544,18 +2696,38 @@ Passion: Web Development, UI/UX Design, Tech Innovation`,
             addChatMessage(message, false);
             input.value = '';
             
-            // Simulate bot response
+            // Show typing indicator
+            showTypingIndicator();
+            
+            // Get AI response
             setTimeout(() => {
-                const responses = [
-                    "That's great! Let me help you with that.",
-                    "I'd be happy to assist you with that.",
-                    "Thanks for your interest! I'll get back to you soon.",
-                    "Feel free to contact me via email or WhatsApp for more details."
-                ];
-                const randomResponse = responses[Math.floor(Math.random() * responses.length)];
-                addChatMessage(randomResponse, true);
-            }, 1000);
+                hideTypingIndicator();
+                const aiResponse = getAIResponse(message);
+                addChatMessage(aiResponse, true);
+            }, 1000 + Math.random() * 1000); // Simulate thinking time
         }
+    }
+    
+    function showTypingIndicator() {
+        const messagesContainer = document.getElementById('chat-messages');
+        const typingDiv = document.createElement('div');
+        typingDiv.id = 'typing-indicator';
+        typingDiv.className = 'chat-message bot typing';
+        typingDiv.innerHTML = `
+            <div class="message-avatar">P</div>
+            <div class="message-content">
+                <div class="typing-dots">
+                    <span></span><span></span><span></span>
+                </div>
+            </div>
+        `;
+        messagesContainer.appendChild(typingDiv);
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    }
+    
+    function hideTypingIndicator() {
+        const typing = document.getElementById('typing-indicator');
+        if (typing) typing.remove();
     }
     
     function sendQuickReply(text) {
@@ -2584,11 +2756,14 @@ Passion: Web Development, UI/UX Design, Tech Innovation`,
     }
     
     // Enter key to send message
-    document.getElementById('chat-input').addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') {
-            sendChatMessage();
-        }
-    });
+    const chatInput = document.getElementById('chat-input');
+    if (chatInput) {
+        chatInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                sendChatMessage();
+            }
+        });
+    }
 </script>
 
 <!-- Typing Speed Game Script -->
