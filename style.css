@@ -118,7 +118,14 @@ nav .fas.fa-bars {
     padding: 8px;
     border-radius: 5px;
     border: 1px solid rgba(0, 255, 65, 0.3);
-    display: none; /* Hidden on desktop */
+    display: none !important; /* Hidden on desktop */
+}
+
+/* Ensure hamburger menu is hidden on screens larger than 600px */
+@media only screen and (min-width: 601px) {
+    nav .fas.fa-bars {
+        display: none !important;
+    }
 }
 
 .logo{
@@ -162,6 +169,7 @@ nav ul li a{
     margin-left: auto;
     order: 3;
     flex-shrink: 0;
+    padding-right: 0;
 }
 
 nav ul {
@@ -1101,6 +1109,13 @@ form .btn2{
 }
 
 /* -----------------css for small screens--------- */
+
+nav .fas:hover {
+    color: #00ffff;
+    text-shadow: 0 0 10px #00ffff;
+}
+
+@media only screen and (max-width: 600px){
     /* Menu toggle button - always visible on mobile */
     nav .fas.fa-bars {
         display: flex !important;
@@ -1111,7 +1126,7 @@ form .btn2{
         position: fixed;
         top: 15px;
         right: 15px;
-        z-index: 1001;
+        z-index: 1003;
         background: rgba(0, 0, 0, 0.95);
         padding: 12px;
         border-radius: 8px;
@@ -1128,13 +1143,11 @@ form .btn2{
         box-shadow: 0 0 30px rgba(0, 255, 65, 0.8);
         transform: scale(1.1);
     }
-
-nav .fas:hover {
-    color: #00ffff;
-    text-shadow: 0 0 10px #00ffff;
-}
-
-@media only screen and (max-width: 600px){
+    
+    .nav-controls {
+        display: none !important;
+    }
+    
     .container {
         padding: 10px 4%;
         max-width: 100%;
@@ -1195,8 +1208,8 @@ nav .fas:hover {
         right: -200px;
         width: 200px;
         height: 100vh;
-        padding-top: 60px;
-        z-index: 1000;
+        padding-top: 80px;
+        z-index: 1002;
         transition: right 0.5s;
         -webkit-backdrop-filter: blur(10px);
         backdrop-filter: blur(10px);
@@ -3772,7 +3785,7 @@ select:focus {
 /* Responsive Design for New Features */
 @media only screen and (max-width: 600px){
     .nav-controls {
-        gap: 10px;
+        display: none !important;
     }
     
     .theme-toggle, .terminal-toggle {
@@ -4006,8 +4019,7 @@ select:focus {
     }
     
     .nav-controls {
-        flex-wrap: wrap;
-        gap: 8px;
+        display: none !important;
     }
     
     .voice-toggle,
@@ -4023,7 +4035,7 @@ select:focus {
     
 }
 
-/* Christmas Game Styles */
+/* Christmas Game Styles - Desktop */
 #christmas-game {
     padding: 80px 0;
     background: linear-gradient(135deg, #000000 0%, #001a00 50%, #000000 100%);
@@ -4302,90 +4314,116 @@ select:focus {
 
 /* Christmas Game Mobile */
 @media only screen and (max-width: 600px) {
-    /* Christmas Game Mobile */
+    /* Christmas Game Mobile - Comprehensive Fix */
     #christmas-game {
-        padding: 40px 0;
+        padding: 20px 0 !important;
         overflow-x: hidden;
-    }
-    
-    .christmas-game-container {
-        padding: 20px 15px;
-        margin: 0 10px;
-        max-width: calc(100% - 20px);
+        width: 100%;
         box-sizing: border-box;
     }
     
+    #christmas-game .container {
+        padding: 10px 5px !important;
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+    
+    #christmas-game .sub-title {
+        font-size: 20px !important;
+        margin-bottom: 10px;
+        padding: 0 10px;
+        text-align: center;
+    }
+    
+    #christmas-game .game-intro {
+        font-size: 12px !important;
+        margin-bottom: 15px;
+        padding: 0 10px;
+        text-align: center;
+        line-height: 1.4;
+    }
+    
+    .christmas-game-container {
+        padding: 15px 10px !important;
+        margin: 0 5px !important;
+        max-width: calc(100% - 10px) !important;
+        box-sizing: border-box;
+        width: calc(100% - 10px) !important;
+    }
+    
     #christmas-game .memory-game-grid {
-        grid-template-columns: repeat(3, 1fr) !important;
-        gap: 8px !important;
-        margin-bottom: 20px !important;
+        grid-template-columns: repeat(4, 1fr) !important;
+        gap: 6px !important;
+        margin-bottom: 15px !important;
+        padding: 0 !important;
+        width: 100% !important;
     }
     
     #christmas-game .memory-card {
-        height: 70px !important;
-        min-height: 70px !important;
-        font-size: 20px !important;
+        height: 65px !important;
+        min-height: 65px !important;
+        max-height: 65px !important;
+        width: 100% !important;
+        aspect-ratio: 1 !important;
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: transparent;
+        cursor: pointer;
+        -webkit-user-select: none;
+        user-select: none;
     }
     
-    .card-front,
-    .card-back {
-        font-size: 20px;
+    #christmas-game .card-front,
+    #christmas-game .card-back {
+        font-size: 24px !important;
+        border-width: 1px !important;
+        border-radius: 6px !important;
     }
     
     .game-info-bar {
-        flex-direction: column;
-        gap: 10px;
-        padding: 15px;
-        margin-bottom: 20px;
+        flex-direction: row !important;
+        flex-wrap: wrap !important;
+        gap: 8px !important;
+        padding: 12px !important;
+        margin-bottom: 15px !important;
+        justify-content: space-around !important;
     }
     
     .game-stat {
-        font-size: 14px;
+        font-size: 12px !important;
         justify-content: center;
+        flex: 1 1 auto;
+        min-width: 80px;
     }
     
     .game-stat i {
-        font-size: 18px;
+        font-size: 14px !important;
+    }
+    
+    .game-stat span {
+        font-size: 12px !important;
     }
     
     .game-controls {
         flex-direction: column;
         gap: 10px;
+        width: 100%;
     }
     
     .game-btn {
-        width: 100%;
-        padding: 12px;
-        font-size: 14px;
+        width: 100% !important;
+        padding: 14px !important;
+        font-size: 14px !important;
+        min-height: 48px;
+        touch-action: manipulation;
     }
     
     .reward-content {
-        width: 90%;
-        max-width: 400px;
-        padding: 20px;
+        width: 95% !important;
+        max-width: 100% !important;
+        padding: 20px 15px !important;
+        margin: 10px !important;
     }
-    
-    .game-intro {
-        font-size: 14px;
-        margin-bottom: 15px;
-        text-align: center;
-    }
-}
-
-/* Christmas Game Styles */
-#christmas-game {
-    padding: 80px 0;
-    background: linear-gradient(135deg, #000000 0%, #001a00 50%, #000000 100%);
-    position: relative;
-}
-
-.christmas-game-container {
-    max-width: 800px;
-    margin: 0 auto;
-    background: rgba(0, 255, 65, 0.05);
-    border: 2px solid rgba(0, 255, 65, 0.3);
-    border-radius: 15px;
-    padding: 40px;
 }
 
 .game-info-bar {

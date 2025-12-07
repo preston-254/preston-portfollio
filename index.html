@@ -2886,7 +2886,12 @@ Passion: Web Development, UI/UX Design, Tech Innovation`,
             cardElement.className = 'memory-card';
             cardElement.dataset.index = index;
             cardElement.innerHTML = '<div class="card-front">?</div><div class="card-back">' + card.icon + '</div>';
+            // Add both click and touch support for mobile
             cardElement.addEventListener('click', () => flipCard(index));
+            cardElement.addEventListener('touchend', (e) => {
+                e.preventDefault();
+                flipCard(index);
+            });
             gameGrid.appendChild(cardElement);
         });
     }
