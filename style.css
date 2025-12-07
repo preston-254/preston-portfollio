@@ -98,34 +98,36 @@ body{
     box-sizing: border-box;
 }
 
+/* Nav wrapper to extend full width */
+#header {
+    position: relative;
+}
+
 nav{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: nowrap;
-    padding: 20px 0;
     position: sticky;
     top: 0;
     background: rgba(0, 0, 0, 0.95);
     -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
     z-index: 100;
-    gap: 15px;
     width: 100%;
-    max-width: 100%;
     margin: 0;
+    padding: 0;
     box-sizing: border-box;
     border-bottom: 1px solid rgba(0, 255, 65, 0.2);
 }
 
-/* Make nav background extend full width by breaking out of container */
-@media only screen and (min-width: 601px) {
-    nav {
-        margin-left: calc(-10%);
-        margin-right: calc(-10%);
-        padding-left: 10%;
-        padding-right: 10%;
-    }
+.nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    padding: 20px 10%;
+    gap: 15px;
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    box-sizing: border-box;
 }
 
 nav > * {
@@ -1204,6 +1206,12 @@ nav .fas:hover {
         pointer-events: auto !important;
         visibility: visible !important;
         opacity: 1 !important;
+        -webkit-user-select: none;
+        user-select: none;
+    }
+    
+    nav .fas.fa-bars:active {
+        transform: scale(0.95);
     }
     
     nav .fas.fa-bars:hover {
@@ -1306,27 +1314,58 @@ nav .fas:hover {
     .stat-label {
         font-size: 11px;
     }
-    nav ul{
-        background: rgba(0, 0, 0, 0.98) !important;
-        border: 1px solid rgba(0, 255, 65, 0.3);
-        position: fixed !important;
+    /* Menu overlay backdrop */
+    .menu-backdrop {
+        position: fixed;
         top: 0;
-        right: -200px;
-        width: 200px;
+        left: 0;
+        width: 100vw;
         height: 100vh;
-        padding-top: 80px;
+        background: rgba(0, 0, 0, 0.8);
+        z-index: 9999;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.5s ease;
+        display: none;
+    }
+    
+    .menu-backdrop.active {
+        opacity: 1;
+        pointer-events: auto;
+        display: block;
+    }
+    
+    nav ul#sidemenu{
+        background: rgba(0, 0, 0, 0.98) !important;
+        border: 2px solid rgba(0, 255, 65, 0.5) !important;
+        position: fixed !important;
+        top: 0 !important;
+        left: -200px !important;
+        right: auto !important;
+        width: 200px !important;
+        min-width: 200px !important;
+        height: 100vh !important;
+        padding-top: 80px !important;
         z-index: 10000 !important;
-        transition: right 0.5s ease;
+        transition: left 0.5s ease !important;
         -webkit-backdrop-filter: blur(10px);
         backdrop-filter: blur(10px);
         overflow-y: auto;
         display: block !important;
         visibility: visible !important;
         opacity: 1 !important;
+        margin: 0 !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        list-style: none !important;
+        box-shadow: 2px 0 20px rgba(0, 255, 65, 0.3) !important;
     }
     
-    nav ul[style*="right: 0"] {
-        right: 0 !important;
+    nav ul#sidemenu.menu-open,
+    nav ul#sidemenu[style*="left: 0"],
+    nav ul#sidemenu[style*='left: 0'] {
+        left: 0 !important;
+        right: auto !important;
     }
     nav ul li{
         display: block;
@@ -1335,7 +1374,8 @@ nav .fas:hover {
     nav ul li:last-child {
         position: absolute;
         top: 20px;
-        left: 20px;
+        right: 20px;
+        left: auto;
         margin: 0;
     }
     
