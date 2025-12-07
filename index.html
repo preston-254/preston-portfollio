@@ -63,17 +63,13 @@
                 <li><i class="fas fa-times" onclick="closemenu()" aria-label="Close menu"></i></li>
             </ul>
             <div class="nav-controls">
-                <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme" title="Press 'T' to toggle theme">
-                    <i class="fas fa-palette"></i>
-                    <span class="button-label">Theme</span>
-                </button>
                 <button class="terminal-toggle" onclick="toggleTerminal()" aria-label="Open terminal" title="Press '~' to open terminal">
                     <i class="fas fa-terminal"></i>
                     <span class="button-label">Terminal</span>
                 </button>
-                <button class="voice-toggle" onclick="toggleVoiceCommands()" aria-label="Voice commands" title="Press 'V' for voice commands">
+                <button class="preston-ai-toggle" onclick="activatePrestonAI()" aria-label="Talk to Preston AI" title="Say 'Hey Preston' to talk to AI">
                     <i class="fas fa-microphone"></i>
-                    <span class="button-label">Voice</span>
+                    <span class="button-label">Preston AI</span>
                 </button>
                 <button class="analytics-toggle" onclick="toggleAnalytics()" aria-label="Analytics" title="View analytics">
                     <i class="fas fa-chart-line"></i>
@@ -524,6 +520,32 @@ console.log(fizzBuzz());"></textarea>
     <div class="container">
         <h1 class="sub-title">🎄 Christmas Special Game 🎄</h1>
         <p class="game-intro">Match the Christmas icons and win exclusive discounts on our packages! 🎁</p>
+        
+        <!-- Countdown Timer -->
+        <div class="christmas-countdown" id="christmas-countdown">
+            <div class="countdown-label">Game ends in:</div>
+            <div class="countdown-timer">
+                <span class="countdown-item">
+                    <span class="countdown-value" id="days">00</span>
+                    <span class="countdown-label-small">Days</span>
+                </span>
+                <span class="countdown-separator">:</span>
+                <span class="countdown-item">
+                    <span class="countdown-value" id="hours">00</span>
+                    <span class="countdown-label-small">Hours</span>
+                </span>
+                <span class="countdown-separator">:</span>
+                <span class="countdown-item">
+                    <span class="countdown-value" id="minutes">00</span>
+                    <span class="countdown-label-small">Minutes</span>
+                </span>
+                <span class="countdown-separator">:</span>
+                <span class="countdown-item">
+                    <span class="countdown-value" id="seconds">00</span>
+                    <span class="countdown-label-small">Seconds</span>
+                </span>
+            </div>
+        </div>
         
         <div class="christmas-game-container">
             <div class="game-info-bar">
@@ -2316,11 +2338,13 @@ Passion: Web Development, UI/UX Design, Tech Innovation`,
     }
 </script>
 
-<!-- Voice Commands Script -->
+<!-- Preston AI Voice Assistant Script -->
 <script>
     let recognition = null;
     let isListening = false;
+    let synthesis = null;
     
+    // Initialize speech recognition and synthesis
     if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
         const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
         recognition = new SpeechRecognition();
@@ -2330,83 +2354,152 @@ Passion: Web Development, UI/UX Design, Tech Innovation`,
         
         recognition.onresult = function(event) {
             const command = event.results[0][0].transcript.toLowerCase();
-            handleVoiceCommand(command);
+            handlePrestonAICommand(command);
         };
         
         recognition.onend = function() {
             isListening = false;
-            document.getElementById('voice-indicator').classList.add('voice-hidden');
+            hideListeningIndicator();
         };
         
         recognition.onerror = function(event) {
             console.error('Speech recognition error:', event.error);
             isListening = false;
-            document.getElementById('voice-indicator').classList.add('voice-hidden');
+            hideListeningIndicator();
         };
     }
     
-    // Make toggleVoiceCommands globally accessible
-    window.toggleVoiceCommands = function() {
+    // Initialize speech synthesis
+    if ('speechSynthesis' in window) {
+        synthesis = window.speechSynthesis;
+    }
+    
+    // Preston AI response text
+    const prestonAIResponse = `Hello! I'm Preston AI, your virtual assistant. Let me tell you about Preston Mwendwa and this amazing portfolio. Preston is a talented web developer and creative professional from Kenya, specializing in creating stunning, responsive websites and web applications. This portfolio showcases his expertise in front-end development, UI/UX design, and modern web technologies. Preston has worked on over 50 projects, written more than 100,000 lines of code, and is passionate about bringing creative ideas to life through code. Whether you need a portfolio website, business site, e-commerce platform, or custom web solution, Preston has the skills and experience to deliver exceptional results. Feel free to explore the portfolio sections to see his work, check out the pricing packages, or get in touch through the contact form. How can I help you today?`;
+    
+    // Make activatePrestonAI globally accessible
+    window.activatePrestonAI = function() {
         if (!recognition) {
-            alert('Voice commands are not supported in your browser. Please use Chrome or Edge.');
+            alert('Voice recognition is not supported in your browser. Please use Chrome or Edge.');
             return;
         }
         
         if (isListening) {
             recognition.stop();
             isListening = false;
-            const indicator = document.getElementById('voice-indicator');
-            if (indicator) indicator.classList.add('voice-hidden');
+            hideListeningIndicator();
         } else {
+            // Start listening for "Hey Preston"
             recognition.start();
             isListening = true;
-            const indicator = document.getElementById('voice-indicator');
-            if (indicator) indicator.classList.remove('voice-hidden');
+            showListeningIndicator();
         }
     };
     
-    function handleVoiceCommand(command) {
-        console.log('Voice command:', command);
+    function showListeningIndicator() {
+        let indicator = document.getElementById('preston-ai-indicator');
+        if (!indicator) {
+            indicator = document.createElement('div');
+            indicator.id = 'preston-ai-indicator';
+            indicator.style.cssText = 'position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(0, 255, 65, 0.95); color: #000; padding: 20px 40px; border-radius: 10px; z-index: 10000; font-weight: bold; box-shadow: 0 0 30px rgba(0, 255, 65, 0.8);';
+            document.body.appendChild(indicator);
+        }
+        indicator.textContent = '🎤 Listening... Say "Hey Preston"';
+        indicator.style.display = 'block';
         
-        if (command.includes('home') || command.includes('go home')) {
-            window.location.hash = '#header';
-        } else if (command.includes('about')) {
-            window.location.hash = '#about';
-        } else if (command.includes('services')) {
-            window.location.hash = '#services';
-        } else if (command.includes('portfolio') || command.includes('work')) {
-            window.location.hash = '#portfolio';
-        } else if (command.includes('contact')) {
-            window.location.hash = '#contact';
-        } else if (command.includes('terminal') || command.includes('open terminal')) {
-            if (typeof window.toggleTerminal === 'function') {
-                window.toggleTerminal();
+        setTimeout(() => {
+            if (indicator && !isListening) {
+                indicator.style.display = 'none';
             }
-        } else if (command.includes('theme') || command.includes('change theme')) {
-            if (typeof window.toggleTheme === 'function') {
-                window.toggleTheme();
-            }
-        } else if (command.includes('chat') || command.includes('open chat')) {
-            if (typeof toggleChat === 'function') {
-                toggleChat();
-            }
-        } else if (command.includes('analytics') || command.includes('stats')) {
-            if (typeof window.toggleAnalytics === 'function') {
-                window.toggleAnalytics();
-            }
-        } else if (command.includes('challenge') || command.includes('coding challenge')) {
-            document.getElementById('coding-challenge').scrollIntoView({ behavior: 'smooth' });
+        }, 5000);
+    }
+    
+    function hideListeningIndicator() {
+        const indicator = document.getElementById('preston-ai-indicator');
+        if (indicator) indicator.style.display = 'none';
+    }
+    
+    function handlePrestonAICommand(command) {
+        console.log('Voice command:', command);
+        isListening = false;
+        hideListeningIndicator();
+        
+        if (command.includes('hey preston') || command.includes('hi preston') || command.includes('hello preston')) {
+            speakPrestonAIResponse();
         } else {
-            alert(`Command "${command}" not recognized. Try: home, about, services, portfolio, contact, terminal, theme, chat, analytics, or challenge`);
+            if (synthesis) {
+                const utterance = new SpeechSynthesisUtterance("Please say 'Hey Preston' to activate me.");
+                utterance.voice = getFemaleVoice();
+                utterance.rate = 1.0;
+                utterance.pitch = 1.0;
+                synthesis.speak(utterance);
+            }
         }
     }
     
-    // Keyboard shortcut for voice commands
+    function speakPrestonAIResponse() {
+        if (!synthesis) {
+            alert('Text-to-speech is not supported in your browser.');
+            return;
+        }
+        
+        const utterance = new SpeechSynthesisUtterance(prestonAIResponse);
+        utterance.voice = getFemaleVoice();
+        utterance.rate = 0.9;
+        utterance.pitch = 1.1;
+        utterance.volume = 1.0;
+        
+        showSpeakingIndicator();
+        
+        utterance.onend = function() {
+            hideSpeakingIndicator();
+        };
+        
+        synthesis.speak(utterance);
+    }
+    
+    function getFemaleVoice() {
+        const voices = synthesis.getVoices();
+        const femaleVoices = voices.filter(voice => 
+            voice.name.toLowerCase().includes('female') || 
+            voice.name.toLowerCase().includes('zira') ||
+            voice.name.toLowerCase().includes('samantha') ||
+            voice.name.toLowerCase().includes('karen')
+        );
+        
+        if (femaleVoices.length > 0) return femaleVoices[0];
+        return voices[0] || null;
+    }
+    
+    function showSpeakingIndicator() {
+        let indicator = document.getElementById('preston-ai-speaking');
+        if (!indicator) {
+            indicator = document.createElement('div');
+            indicator.id = 'preston-ai-speaking';
+            indicator.style.cssText = 'position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(0, 255, 65, 0.95); color: #000; padding: 20px 40px; border-radius: 10px; z-index: 10000; font-weight: bold; box-shadow: 0 0 30px rgba(0, 255, 65, 0.8); text-align: center;';
+            document.body.appendChild(indicator);
+        }
+        indicator.innerHTML = '🎤 Preston AI is speaking...<br><small>Listen carefully</small>';
+        indicator.style.display = 'block';
+    }
+    
+    function hideSpeakingIndicator() {
+        const indicator = document.getElementById('preston-ai-speaking');
+        if (indicator) indicator.style.display = 'none';
+    }
+    
+    if (synthesis && synthesis.onvoiceschanged !== undefined) {
+        synthesis.onvoiceschanged = function() {};
+    } else if (command.includes('challenge') || command.includes('coding challenge')) {
+            document.getElementById('coding-challenge').scrollIntoView({ behavior: 'smooth' });
+    }
+    
+    // Keyboard shortcut for Preston AI
     document.addEventListener('keydown', (e) => {
         if ((e.key === 'v' || e.key === 'V') && !e.target.matches('input, textarea')) {
             e.preventDefault();
-            if (typeof window.toggleVoiceCommands === 'function') {
-                window.toggleVoiceCommands();
+            if (typeof window.activatePrestonAI === 'function') {
+                window.activatePrestonAI();
             }
         }
     });
@@ -3017,10 +3110,9 @@ Passion: Web Development, UI/UX Design, Tech Innovation`,
     }
     
     function showRewardModal() {
-        // Generate random discount (15%, 20%, or 25%)
-        const discounts = [15, 20, 25];
-        const discount = discounts[Math.floor(Math.random() * discounts.length)];
-        const code = `XMAS${discount}${Math.floor(Math.random() * 1000)}`;
+        // Fixed 5% discount
+        const discount = 5;
+        const code = `XMAS5${Math.floor(Math.random() * 1000)}`;
         
         const codeEl = document.getElementById('discount-code');
         const percentEl = document.getElementById('discount-percent');
@@ -3033,6 +3125,9 @@ Passion: Web Development, UI/UX Design, Tech Innovation`,
         // Store discount code in localStorage
         localStorage.setItem('christmasDiscountCode', code);
         localStorage.setItem('christmasDiscountPercent', discount);
+        
+        // Apply discount to pricing packages
+        applyDiscountToPackages(discount);
     }
     
     function closeRewardModal() {
@@ -3066,6 +3161,77 @@ Passion: Web Development, UI/UX Design, Tech Innovation`,
             pricingSection.scrollIntoView({ behavior: 'smooth' });
         }
     }
+    
+    // Apply discount to pricing packages
+    function applyDiscountToPackages(discountPercent) {
+        const pricingCards = document.querySelectorAll('.pricing-card');
+        pricingCards.forEach(card => {
+            const priceElement = card.querySelector('.amount');
+            if (priceElement && !card.querySelector('.original-price')) {
+                const originalPrice = parseInt(priceElement.textContent.replace(/,/g, ''));
+                const discountedPrice = Math.round(originalPrice * (1 - discountPercent / 100));
+                
+                // Create original price display
+                const originalPriceSpan = document.createElement('span');
+                originalPriceSpan.className = 'original-price';
+                originalPriceSpan.style.textDecoration = 'line-through';
+                originalPriceSpan.style.opacity = '0.6';
+                originalPriceSpan.style.marginRight = '10px';
+                originalPriceSpan.textContent = originalPrice.toLocaleString();
+                
+                // Update price
+                priceElement.textContent = discountedPrice.toLocaleString();
+                priceElement.parentElement.insertBefore(originalPriceSpan, priceElement);
+                
+                // Add discount badge
+                if (!card.querySelector('.discount-badge')) {
+                    const discountBadge = document.createElement('div');
+                    discountBadge.className = 'discount-badge';
+                    discountBadge.textContent = `${discountPercent}% OFF`;
+                    card.querySelector('.pricing-header').appendChild(discountBadge);
+                }
+            }
+        });
+    }
+    
+    // Check for existing discount on page load
+    document.addEventListener('DOMContentLoaded', () => {
+        const savedDiscount = localStorage.getItem('christmasDiscountPercent');
+        if (savedDiscount) {
+            applyDiscountToPackages(parseInt(savedDiscount));
+        }
+    });
+    
+    // Christmas Countdown Timer
+    function updateChristmasCountdown() {
+        const now = new Date().getTime();
+        const endDate = new Date('December 31, 2024 23:59:59').getTime();
+        const distance = endDate - now;
+        
+        if (distance < 0) {
+            document.getElementById('christmas-countdown').innerHTML = '<div class="countdown-label">Game has ended</div>';
+            return;
+        }
+        
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        
+        const daysEl = document.getElementById('days');
+        const hoursEl = document.getElementById('hours');
+        const minutesEl = document.getElementById('minutes');
+        const secondsEl = document.getElementById('seconds');
+        
+        if (daysEl) daysEl.textContent = String(days).padStart(2, '0');
+        if (hoursEl) hoursEl.textContent = String(hours).padStart(2, '0');
+        if (minutesEl) minutesEl.textContent = String(minutes).padStart(2, '0');
+        if (secondsEl) secondsEl.textContent = String(seconds).padStart(2, '0');
+    }
+    
+    // Update countdown every second
+    setInterval(updateChristmasCountdown, 1000);
+    updateChristmasCountdown();
     
     // Initialize game on page load
     document.addEventListener('DOMContentLoaded', () => {

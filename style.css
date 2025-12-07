@@ -179,6 +179,14 @@ nav ul {
     min-width: 0;
     max-width: 100%;
     margin: 0 20px;
+    display: flex;
+}
+
+/* Nav ul is visible on desktop, hidden on mobile until menu opens */
+@media only screen and (min-width: 601px) {
+    nav ul {
+        display: flex;
+    }
 }
 
 .logo {
@@ -186,7 +194,7 @@ nav ul {
     flex-shrink: 0;
 }
 
-.theme-toggle, .terminal-toggle, .voice-toggle, .analytics-toggle {
+.terminal-toggle, .preston-ai-toggle, .analytics-toggle {
     background: rgba(0, 255, 65, 0.1);
     border: 2px solid var(--primary-color);
     color: var(--primary-color);
@@ -216,16 +224,15 @@ nav ul {
     font-family: 'Orbitron', sans-serif;
 }
 
-.theme-toggle:hover, .terminal-toggle:hover, .voice-toggle:hover, .analytics-toggle:hover {
+.terminal-toggle:hover, .preston-ai-toggle:hover, .analytics-toggle:hover {
     background: var(--primary-color);
     color: #000;
     box-shadow: 0 0 20px var(--primary-color);
     transform: scale(1.05);
 }
 
-.theme-toggle:hover .button-label,
 .terminal-toggle:hover .button-label,
-.voice-toggle:hover .button-label,
+.preston-ai-toggle:hover .button-label,
 .analytics-toggle:hover .button-label {
     color: #000;
 }
@@ -3788,7 +3795,7 @@ select:focus {
         display: none !important;
     }
     
-    .theme-toggle, .terminal-toggle {
+    .terminal-toggle, .preston-ai-toggle {
         width: auto;
         height: 40px;
         padding: 0 12px;
@@ -4022,7 +4029,7 @@ select:focus {
         display: none !important;
     }
     
-    .voice-toggle,
+    .preston-ai-toggle,
     .analytics-toggle {
         width: auto;
         padding: 0 10px;
@@ -4311,6 +4318,95 @@ select:focus {
     opacity: 0.3;
 }
 
+/* Christmas Countdown Timer */
+.christmas-countdown {
+    text-align: center;
+    margin: 30px 0;
+    padding: 20px;
+    background: rgba(0, 255, 65, 0.05);
+    border: 2px solid rgba(0, 255, 65, 0.3);
+    border-radius: 15px;
+}
+
+.countdown-label {
+    font-size: 18px;
+    color: var(--primary-color);
+    margin-bottom: 15px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.countdown-timer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.countdown-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 15px 20px;
+    border-radius: 10px;
+    border: 2px solid rgba(0, 255, 65, 0.5);
+    min-width: 80px;
+}
+
+.countdown-value {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--primary-color);
+    font-family: 'Orbitron', sans-serif;
+    text-shadow: 0 0 10px rgba(0, 255, 65, 0.8);
+}
+
+.countdown-label-small {
+    font-size: 12px;
+    color: var(--primary-color);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 5px;
+}
+
+.countdown-separator {
+    font-size: 24px;
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+/* Discount Badge for Pricing Cards */
+.discount-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: linear-gradient(135deg, #ff0000, #ff6b00);
+    color: #fff;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 700;
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.5);
+    z-index: 10;
+    animation: discountPulse 2s infinite;
+}
+
+.pricing-header {
+    position: relative;
+}
+
+.original-price {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+@keyframes discountPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
 
 /* Christmas Game Mobile */
 @media only screen and (max-width: 600px) {
